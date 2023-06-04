@@ -4,5 +4,9 @@ namespace PlantNamespace{
             super(growingSpeed, recoveryTime);
             this.satiety = satiety;
         }
+        
+        public getSatiety(): number{
+            return this.satiety
+        }
     }
 }

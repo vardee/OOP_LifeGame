@@ -5,8 +5,15 @@ namespace PlantNamespace{
             this.growingSpeed = growingSpeed
         }
 
-        public grow(){
-            
+        public grow(){//Cвязать с EventBus и PlantBornEvent
         } 
-    } //Cвязать с EventBus и PlantBornEvent
+
+        public getRecoveryTime(): number{
+            return this.recoveryTime
+        }
+
+        public getGrowingSpeed(): number{
+            return this.growingSpeed
+        }
+    } 
 }

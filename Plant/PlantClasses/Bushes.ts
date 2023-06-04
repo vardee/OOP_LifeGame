@@ -5,8 +5,15 @@ namespace PlantNamespace{
             this.damage = damage;
             this.haveFruit = haveFruit;
         }
-    }
-    function dropFruit(){
+    
+        public dropFruit(){} //Нужно подвязать сюда Fruit
 
+        public getDamage(): number{
+            return this.damage
+        }
+
+        public getHaveFruit(): boolean{
+            return this.haveFruit
+        }
     }
 }

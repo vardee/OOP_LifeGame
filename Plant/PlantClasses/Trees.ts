@@ -4,5 +4,10 @@ namespace PlantNamespace{
             super(growingSpeed, recoveryTime);
             this.numberOfWood = numberOfWood;
         }
+
+        public getNumberOfWoods(): number{
+            return this.numberOfWood
+        }
+        
     }
 }
