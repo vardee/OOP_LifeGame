@@ -1,38 +1,57 @@
-class Mapping{
-    public createMap(){
-        document.addEventListener('DOMContentLoaded', () => {
-            const table = document.getElementById('myTable');
-            if (table) {
-                for (let i = 0; i < 50; i++) {
-                    const row = document.createElement('tr');
+class simulationMap {
+    
+    private mapCreated: boolean;
+    private size: number
 
-                    for (let j = 0; j < 50; j++) {
-                        const cell = document.createElement('td');
-                        row.appendChild(cell);
-                    }
-                    table.appendChild(row);
-                }
-            }
-        });
+    constructor(size: number) {
+        this.mapCreated = false;
+        this.size = size
     }
-    clearMap(){
 
-    }
-}
-    document.addEventListener('DOMContentLoaded', () => {
+    public createMap() {
         const table = document.getElementById('myTable');
-        if (table) {
-            for (let i = 0; i < 50; i++) {
+        if (table && !this.mapCreated) {
+            for (let i = 0; i < this.size; i++) {
                 const row = document.createElement('tr');
-
-                for (let j = 0; j < 50; j++) {
+    
+                for (let j = 0; j < this.size; j++) {
                     const cell = document.createElement('td');
                     row.appendChild(cell);
                 }
                 table.appendChild(row);
             }
+            this.mapCreated = true;
         }
+    }
+
+    public clearMap() {
+        // Реализация очистки карты
+    }
+
+    public getMapCreated(): boolean{
+        return this.mapCreated
+    }
+    
+    public getSize(): number{
+        return this.size
+    }
+
+}
+
+const map = new simulationMap(50);
+
+const createMap = document.getElementById('createTable');
+
+if (createMap) {
+    createMap.addEventListener('click', () => {
+        map.createMap();
     });
+}
 
+const startSimulation = document.getElementById('startSimulation');
 
-
+if (startSimulation) {
+    startSimulation.addEventListener('click', () => {
+        console.log("Simulation Started")
+    });
+}
