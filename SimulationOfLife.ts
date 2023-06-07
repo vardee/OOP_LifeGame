@@ -52,6 +52,8 @@ const startSimulation = document.getElementById('startSimulation');
 
 if (startSimulation) {
     startSimulation.addEventListener('click', () => {
-        console.log("Simulation Started")
+        if (map.getMapCreated())
+        {
+            console.log("Simulation Started")}
     });
 }
