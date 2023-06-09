@@ -3,16 +3,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
     <meta charset="UTF-8">
-    <title>aStar</title>
+    <title>Simulation</title>
     <link rel="stylesheet" href="table.css">
 </head>
 <body>
     <h1 id="SimulationOfLife">Simulation Of Life</h1>
     <table id="myTable" class=table></table>
+    <script>let exports = {};</script>
     <div id="buttons">
         <button id="startSimulation">Start Simulation</button>
         <button id="createTable">Create Map</button>
     </div>
-    <script src="SimulationOfLife.js"></script> 
+    <script type="module" src='SimulationOfLife.js'></script>
 </body>
 </html>

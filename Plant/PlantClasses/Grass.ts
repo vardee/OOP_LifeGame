@@ -1,6 +1,11 @@
-namespace PlantNamespace{
-    export abstract class Grass extends Plant{
-        constructor(protected timeToDeath: number, protected satiety: number, protected recoveryTime: number, protected growingSpeed: number){
+import {PlantNamespace} from "./AbstractPlant";
+    export abstract class Grass extends PlantNamespace.Plant{
+        constructor(
+            protected timeToDeath: number,
+             protected satiety: number,
+              protected recoveryTime: number,
+               protected growingSpeed: number
+               ){
             super(timeToDeath, growingSpeed, recoveryTime);
             this.satiety = satiety;
         }
@@ -9,4 +14,3 @@ namespace PlantNamespace{
             return this.satiety
         }
     }
-}

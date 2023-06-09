@@ -1,12 +1,18 @@
-namespace PlantNamespace{
+import { Creature } from './creature.js';
+export namespace PlantNamespace{
     export abstract class Plant extends Creature{
-        constructor(protected timeToDeath: number, protected recoveryTime: number, protected growingSpeed: number){
+        constructor(
+            protected timeToDeath: number,
+             protected recoveryTime: number, 
+             protected growingSpeed: number
+             ){
             super(timeToDeath)
             this.recoveryTime = recoveryTime
             this.growingSpeed = growingSpeed
         }
-
-        public grow(){//Cвязать с EventBus и PlantBornEvent
+        public grow(){
+        //Cвязать с EventBus и PlantBornEvent
+        
         } 
 
         public getRecoveryTime(): number{

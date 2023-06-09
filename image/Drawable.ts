@@ -1,11 +1,5 @@
-namespace image {
-
+export namespace image {
     export interface Drawable {
-
-        drawObject() : Boolean {
-            //todo not implemented
-        }
-
+        drawObject() : void
     }
-
 }
