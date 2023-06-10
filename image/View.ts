@@ -1,5 +1,4 @@
 namespace image {
-
     export class View {
 
         constructor(private distanceDrawing: Number) {

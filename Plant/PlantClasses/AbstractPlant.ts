@@ -1,6 +1,5 @@
-import { Creature } from './creature.js';
-export namespace PlantNamespace{
-    export abstract class Plant extends Creature{
+import { Creature } from "./creature"
+export abstract class Plant extends Creature{
         constructor(
             protected timeToDeath: number,
              protected recoveryTime: number, 
@@ -23,4 +22,3 @@ export namespace PlantNamespace{
             return this.growingSpeed
         }
     } 
-}

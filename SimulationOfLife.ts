@@ -1,4 +1,4 @@
-export class simulationMap {
+export class SimulationMap {
     
     public table: HTMLTableElement;
     private mapCreated: boolean;
