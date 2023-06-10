@@ -11,12 +11,12 @@ import { Currant } from "../Plant/PlantObjects/Bushes/Currant.js"
 import { Hawthorn } from "../Plant/PlantObjects/Bushes/Hawthorn.js"
 import { Raspberries } from "../Plant/PlantObjects/Bushes/Raspberries.js"
 
-import {map} from "/VisualCodeProject/OOP-OOP-2023-OOP2023Team26/SimulationOfLife.js"
+//import {map} from "/VisualCodeProject/OOP-OOP-2023-OOP2023Team26/SimulationOfLife.js"
 
     export class ImageProvider{
 
         drawObject <T>(object: T){
-            map.table.rows[1].cells[1].style.backgroundColor = this.getPicture(object)
+          //  map.table.rows[1].cells[1].style.backgroundColor = this.getPicture(object)
         }
 
         private getPicture <T>(object: T): string{

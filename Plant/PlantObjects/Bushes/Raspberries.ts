@@ -1,4 +1,4 @@
-import {Bushes} from "/VisualCodeProject/OOP-OOP-2023-OOP2023Team26/Plant/PlantClasses/Bushes";
+import {Bushes} from "/VisualCodeProject/OOP-OOP-2023-OOP2023Team26/Plant/PlantClasses/Bushes.js";
     export class Raspberries extends Bushes{
         constructor(protected timeToDeath: number,
              protected damage: number,

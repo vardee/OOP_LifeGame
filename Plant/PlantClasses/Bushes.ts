@@ -1,4 +1,4 @@
-import {PlantNamespace} from "./AbstractPlant";
+import {PlantNamespace} from "./AbstractPlant.js";
     export abstract class Bushes extends PlantNamespace.Plant{
         constructor(
             protected timeToDeath: number, 

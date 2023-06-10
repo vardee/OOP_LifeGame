@@ -12,6 +12,5 @@ import {PlantNamespace} from "./AbstractPlant.js";
 
         public getNumberOfWoods(): number{
             return this.numberOfWood
-        }
-        
+        }     
     }

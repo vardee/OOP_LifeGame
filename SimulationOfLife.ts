@@ -1,6 +1,3 @@
-import {ImageProvider} from "./image/ImageProvider.js"
-import {Oak} from "./Plant/PlantObjects/Trees/Oak.js"
-
 export class simulationMap {
     
     public table: HTMLTableElement;
@@ -43,28 +40,4 @@ export class simulationMap {
 
 }
 
-export const map = new simulationMap(100);
-
-const OakObject = new Oak(20, 20, 20, 20)
-
-const jj = new ImageProvider
-
-
-const createMap = document.getElementById('createTable');
-
-if (createMap) {
-    createMap.addEventListener('click', () => {
-        map.createMap();
-    });
-}
-
-const startSimulation = document.getElementById('startSimulation');
-
-if (startSimulation) {
-    startSimulation.addEventListener('click', () => {
-        if (map.getMapCreated())
-        {
-            console.log("Simulation Started")}
-    });
-}
 
