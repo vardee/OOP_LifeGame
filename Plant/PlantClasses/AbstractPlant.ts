@@ -1,18 +1,20 @@
-import { Creature } from "./creature"
+import { Creature } from "./creature.js"
+import { BruhDataBase } from "../../image/BruhDataBase.js"
+import { Coordinates } from "./Coordinates.js"
+
 export abstract class Plant extends Creature{
         constructor(
             protected timeToDeath: number,
-             protected recoveryTime: number, 
-             protected growingSpeed: number
-             ){
+            protected recoveryTime: number, 
+            protected growingSpeed: number,
+            protected coordinates: Coordinates,
+            ){
             super(timeToDeath)
             this.recoveryTime = recoveryTime
             this.growingSpeed = growingSpeed
+            this.coordinates = coordinates
         }
-        public grow(){
-        //Cвязать с EventBus и PlantBornEvent
-        
-        } 
+        abstract grow<T>(dataBase: BruhDataBase, plant: T)
 
         public getRecoveryTime(): number{
             return this.recoveryTime
@@ -21,4 +23,10 @@ export abstract class Plant extends Creature{
         public getGrowingSpeed(): number{
             return this.growingSpeed
         }
+
+        public getCoordinates(){
+            return this.coordinates
+        }
+
+        abstract getType()
     } 
