@@ -1,15 +1,23 @@
-namespace AnimalNamespace{
-    export abstract class Predator extends Animal{
-        constructor(protected speed: number, protected satiety: number, protected health: number, protected sex: sex, protected damage: number, protected animalID: number, protected timeToRest: number, protected hungerValue: number){
+import {Animal} from "../../../jsFiles/AnimalsAbstractClass.js";
+import { sex } from "../sex.js"
+export abstract class Predator extends Animal{
+    constructor(
+        speed: number, 
+        satiety: number, 
+        health: number, 
+        sex: sex, 
+        damage: number, 
+        animalID: number, 
+        timeToRest: number, 
+        hungerValue: number){
             super(speed,satiety,health,sex,damage,animalID,timeToRest,hungerValue)
 
-        }
+    }
     
-        public hunt(){
+    public hunt(){
 
-        }
-        public eat(){
+    }
+    public eat(){
 
-        }
     }
 }
