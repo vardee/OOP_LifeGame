@@ -1,17 +1,19 @@
-import { BushTypes } from "./Plant/types.js";
-import { GrassTypes } from "./Plant/types.js";
-import { TreeTypes } from "./Plant/types.js";
+import { BushTypes } from "../Plant/types.js";
+import { GrassTypes } from "../Plant/types.js";
+import { TreeTypes } from "../Plant/types.js";
 import { RandomValues } from "./randomValues.js";
-import { Coordinates } from "./Plant/PlantClasses/Coordinates.js";
-import { Trees } from "./Plant/PlantClasses/Trees.js";
-import { BruhDataBase } from "./image/BruhDataBase.js";
+import { Coordinates } from "../Plant/PlantClasses/Coordinates.js";
+import { Trees } from "../Plant/PlantClasses/Trees.js";
+import { BruhDataBase } from "../image/BruhDataBase.js";
+import { Grass } from "../Plant/PlantClasses/Grass.js";
+import { Bushes } from "../Plant/PlantClasses/Bushes.js";
 
-export class beginning{
+export class Beginning{
     public createPlantStarterPack(dataBase: BruhDataBase){
 
         const randomizer = new RandomValues
 
-        const treeTypesArray: TreeTypes[] = [TreeTypes.Spruce, TreeTypes.Birch, TreeTypes.Oak];
+        const treeTypesArray: TreeTypes[] = [TreeTypes.Spruce, TreeTypes.Birch];
 
         const grassTypesArray: GrassTypes[] = [GrassTypes.MeadowGrass, GrassTypes.Dandelions, GrassTypes.Roses];
 
@@ -47,9 +49,9 @@ export class beginning{
             dataBase.addPlant(data[type]);
           });  
           
-          treeTypesArray.forEach((type) => {
+          grassTypesArray.forEach((type) => {
             const data = {
-              [type]: new Trees(
+              [type]: new Grass(
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
@@ -59,10 +61,28 @@ export class beginning{
                   randomStartPosition.y,
                   randomizer.createRandomValue(5, 20)
                 ),
-                TreeTypes[type as keyof typeof TreeTypes]
+                GrassTypes[type as keyof typeof GrassTypes]
               )
             };
             dataBase.addPlant(data[type]);
-          }); 
+          });
+
+          bushTypesArray.forEach((type) => {
+            const data = {
+              [type]: new Bushes(
+                randomizer.createRandomValue(5, 20),
+                randomizer.createRandomValue(5, 20),
+                randomizer.createRandomValue(5, 20),
+                randomizer.createRandomValue(5, 20),
+                randomizer.createRandomCoordinate(
+                  randomStartPosition.x,
+                  randomStartPosition.y,
+                  randomizer.createRandomValue(5, 20)
+                ),
+                BushTypes[type as keyof typeof BushTypes]
+              )
+            };
+            dataBase.addPlant(data[type]);
+          });  
     }
 }

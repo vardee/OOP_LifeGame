@@ -5,20 +5,21 @@ import { GrassTypes } from "../types.js";
 
     export class Grass extends Plant{
         constructor(
-            protected timeToDeath: number,
+            timeToDeath: number,
              protected satiety: number,
-              protected recoveryTime: number,
-               protected growingSpeed: number,
-               protected coordinates: Coordinates,
-               protected type: GrassTypes
+            recoveryTime: number,
+            growingSpeed: number,
+            coordinates: Coordinates,
+            protected type: GrassTypes
                ){
             super(timeToDeath, growingSpeed, recoveryTime, coordinates);
             this.satiety = satiety;
+            this.type = type
         }
         public getSatiety(): number{
             return this.satiety
         }
-        public grow(dataBase: BruhDataBase) {
+        public grow <T>(dataBase: BruhDataBase, plant: T) {
             
         }
         public getType(){

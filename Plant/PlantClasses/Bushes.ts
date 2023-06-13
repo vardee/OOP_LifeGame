@@ -6,16 +6,16 @@ import { BushTypes } from "../types.js";
 
     export class Bushes extends Plant{
         constructor(
-            protected timeToDeath: number, 
-            protected damage: number, protected haveFruit: boolean,
-             protected recoveryTime: number,
-              protected growingSpeed: number,
-              protected coordinates: Coordinates,
+            timeToDeath: number, 
+            protected damage: number,
+             recoveryTime: number,
+              growingSpeed: number,
+              coordinates: Coordinates,
               protected type: BushTypes
               ){
             super(timeToDeath, recoveryTime, growingSpeed, coordinates)
             this.damage = damage;
-            this.haveFruit = haveFruit;
+            this.type = type
         }
     
         public dropFruit(){} //Нужно подвязать сюда Fruit
@@ -24,9 +24,6 @@ import { BushTypes } from "../types.js";
             return this.damage
         }
 
-        public getHaveFruit(): boolean{
-            return this.haveFruit
-        }
         public grow(dataBase: BruhDataBase) {
             
         }

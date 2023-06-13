@@ -1,4 +1,4 @@
-import { Coordinates } from "./Plant/PlantClasses/Coordinates.js";
+import { Coordinates } from "../Plant/PlantClasses/Coordinates.js";
 
 export class RandomValues{
     public createRandomValue(minimum: number, maximum: number){

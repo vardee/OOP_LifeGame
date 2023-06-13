@@ -14,7 +14,7 @@ export abstract class Plant extends Creature{
             this.growingSpeed = growingSpeed
             this.coordinates = coordinates
         }
-        abstract grow<T>(dataBase: BruhDataBase, plant: T)
+        abstract grow<T>(dataBase: BruhDataBase, plant: T, tick: number)
 
         public getRecoveryTime(): number{
             return this.recoveryTime
@@ -28,5 +28,5 @@ export abstract class Plant extends Creature{
             return this.coordinates
         }
 
-        abstract getType()
+        abstract getType();
     } 
