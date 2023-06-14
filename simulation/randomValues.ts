@@ -1,4 +1,5 @@
 import { Coordinates } from "../Plant/PlantClasses/Coordinates.js";
+import { BruhDataBase } from "../image/BruhDataBase.js";
 
 //Singleton
 
@@ -23,8 +24,37 @@ export class RandomValues {
       randomStartY: number,
       distance: number
     ): Coordinates {
-      const randomX = randomStartX + Math.random() * distance;
-      const randomY = randomStartY + Math.random() * distance;
+      const existingCoordinates = this.getExistingCoordinates();
+      let randomX = randomStartX + Math.random() * distance;
+      let randomY = randomStartY + Math.random() * distance;
+    
+      // Проверка на совпадение существующих координат
+      while (this.coordinatesExist(existingCoordinates, randomX, randomY)) {
+        randomX = randomStartX + Math.random() * distance;
+        randomY = randomStartY + Math.random() * distance;
+      }
+    
       return new Coordinates(Math.round(randomX), Math.round(randomY));
+    }
+    
+    private getExistingCoordinates(): Coordinates[] {
+      const existingCoordinates: Coordinates[] = [];
+      const database = BruhDataBase.getInstance();
+    
+      for (let i = 0; i < database.getPlantDataBaseSize(); i++) {
+        const plant = database.getPlant(i);
+        existingCoordinates.push(plant.getCoordinates());
+      }
+    
+      return existingCoordinates;
+    }
+    
+    private coordinatesExist(existingCoordinates: Coordinates[], x: number, y: number): boolean {
+      for (const coord of existingCoordinates) {
+        if (coord.x === Math.round(x) && coord.y === Math.round(y)) {
+          return true;
+        }
+      }
+      return false;
     }
   }
