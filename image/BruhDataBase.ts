@@ -19,15 +19,10 @@ export class BruhDataBase {
     this.plantArray.push(plant);
   }
 
-  public removePlant(plant: Plant) {
-    const coordinatesToRemove = plant.getCoordinates();
-    for (let i = 0; i < this.plantArray.length; i++) {
-      const currentPlant = this.plantArray[i];
-      if (currentPlant.getCoordinates() === coordinatesToRemove) {
-        this.plantArray.splice(i, 1);
-        break;
+  public removeDeads(plant: any, index) {
+      if (plant.getType().toString() === "Dead") {
+        this.plantArray.splice(index, 1);
       }
-    }
   }
 
   public getPlant(index: number): Plant{

@@ -33,4 +33,9 @@ export abstract class Plant extends Creature{
         }
 
         abstract getType();
+
+        abstract setDeath();
+
+        abstract use<T extends Creature>(plant: T): number
+
     } 

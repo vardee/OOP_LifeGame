@@ -3,7 +3,7 @@ import {Plant} from "./AbstractPlant.js";
 import { Coordinates } from "./Coordinates.js";
 import { BushTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
-
+import { Creature } from "./creature.js";
 
     export class Bushes extends Plant{
         constructor(
@@ -27,10 +27,9 @@ import { RandomValues } from "../../simulation/randomValues.js";
 
         public override grow(dataBase: BruhDataBase, plant: any, tick: number) {
             const randomizer = RandomValues.getInstance();
-            console.log(tick, plant.getGrowingSpeed())
             if (tick === plant.getGrowingSpeed())
             {const newPlant = new Bushes(
-                randomizer.createRandomValue(plant.timeToDeath - 3, plant.timeToDeath + 2) * 5,
+                tick + randomizer.createRandomValue(plant.timeToDeath - 3, plant.timeToDeath + 2) * 2,
                 randomizer.createRandomValue(plant.numberOfWood - 3, plant.numberOfWood + 2),
                 randomizer.createRandomValue(plant.recoveryTime - 3, plant.recoveryTime + 2),
                 tick + randomizer.createRandomValue(plant.recoveryTime - 3, plant.recoveryTime + 2),
@@ -43,5 +42,14 @@ import { RandomValues } from "../../simulation/randomValues.js";
         }
         public override getType() {
             return this.type
+        }
+
+        public setDeath(){
+            this.type = BushTypes.Dead
+        }
+
+        public override use <T extends Creature>(plant: T): number {
+            plant.die(plant, "use")
+            return this.damage
         }
     }

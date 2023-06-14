@@ -1,17 +1,20 @@
 export enum TreeTypes{
     Spruce = "Spruce",
     Birch = "Birch",
-    Oak = "Oak"
+    Oak = "Oak",
+    Dead = "Dead"
 }
 
 export enum GrassTypes{
     MeadowGrass = "MeadowGrass",
     Dandelions = "Dandelions",
-    Roses = "Roses"
+    Roses = "Roses",
+    Dead = "Dead"
 }
 
 export enum BushTypes{
     Currant = "Currant",
     Hawthorn = "Hawthorn",
-    Raspberries = "Raspberries"
+    Raspberries = "Raspberries",
+    Dead = "Dead"
 }

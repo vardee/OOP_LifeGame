@@ -10,35 +10,29 @@ class Simulation{
     }
 
     startSimulation(){
-        const map = new SimulationMap(100);
+        const map =  SimulationMap.getInstance(100);
         const dataBase = BruhDataBase.getInstance();
-        const drawer = new ImageProvider();
+        const drawer =  ImageProvider.getInstance();
         const beginOfSimulation = new Beginning
 
         const timer = Timer.getInstance();
         timer.timeRunning();
 
-        if (!this.simulationStarted)
-        {map.createMap();
-        
-       beginOfSimulation.createPlantStarterPack(dataBase);
-       this.simulationStarted = false
-
-        timer.addTickListener(() => {
-            drawer.getObject(dataBase, map)
-        });
+        if (!this.simulationStarted){
+            map.createMap(); 
+            beginOfSimulation.createPlantStarterPack(dataBase);
+        }
+       this.simulationStarted = true
 
         timer.addTickListener((time) => {
             for (let i = 0; i < dataBase.getPlantDataBaseSize(); i++) {
-              dataBase.getPlant(i).grow(dataBase, dataBase.getPlant(i), time);
+            drawer.getObject(dataBase, map)
+                dataBase.getPlant(i).grow(dataBase, dataBase.getPlant(i), time);
+                dataBase.getPlant(i).die(dataBase.getPlant(i), "die");
+                dataBase.removeDeads(dataBase.getPlant(i), i)
             }
-          });
-          
-        this.simulationStarted = false
+          }); 
     }
-    
-    }
-
     endSimulation(){
     }
 }
