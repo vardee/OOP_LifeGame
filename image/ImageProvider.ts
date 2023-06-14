@@ -14,11 +14,9 @@ export class ImageProvider {
       return ImageProvider.instance;
     }
   
-    public getObject(dataBase: BruhDataBase, map: SimulationMap) {
+    public getObject(dataBase: BruhDataBase, map: SimulationMap, index) {
       const drawer = Drawable.getInstance();
-      for (let i = 0; i < dataBase.getPlantDataBaseSize(); i++) {
-        drawer.drawObject(map, dataBase.getPlant(i).getCoordinates().x, dataBase.getPlant(i).getCoordinates().y, dataBase.getPlant(i).getType());
-      }
+        drawer.drawObject(map, dataBase.getPlant(index).getCoordinates().x, dataBase.getPlant(index).getCoordinates().y, dataBase.getPlant(index).getType());
       drawer.drawCountOfObjects(dataBase);
     }
   }

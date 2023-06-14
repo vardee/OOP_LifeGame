@@ -26,14 +26,18 @@ class Simulation{
 
         timer.addTickListener((time) => {
             for (let i = 0; i < dataBase.getPlantDataBaseSize(); i++) {
-            drawer.getObject(dataBase, map)
                 dataBase.getPlant(i).grow(dataBase, dataBase.getPlant(i), time);
                 dataBase.getPlant(i).die(dataBase.getPlant(i), "die");
+                drawer.getObject(dataBase, map, i)
                 dataBase.removeDeads(dataBase.getPlant(i), i)
             }
           }); 
     }
     endSimulation(){
+        const map = SimulationMap.getInstance(100);
+        const dataBase = BruhDataBase.getInstance();
+        map.clearMap(map)
+        dataBase.clearAll();
     }
 }
 
@@ -44,5 +48,13 @@ const startSimulation = document.getElementById('startSimulation');
 if (startSimulation ) {
     startSimulation.addEventListener('click', () => {
         simulate.startSimulation();
+    });
+}
+
+const endSimulation = document.getElementById('endSimulation');
+
+if (endSimulation ) {
+    endSimulation.addEventListener('click', () => {
+        simulate.endSimulation();
     });
 }

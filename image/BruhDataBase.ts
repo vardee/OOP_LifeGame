@@ -31,5 +31,11 @@ export class BruhDataBase {
   public getPlantDataBaseSize(): number{
     return this.plantArray.length
   }
+
+  public clearAll(){
+    for (let i = 0; i < this.getPlantDataBaseSize(); i++){
+        this.plantArray.splice(i, 1)
+    }
+  }
 }
 

@@ -41,17 +41,13 @@ import { Creature } from "./creature.js";
             return this.type
         }
 
-        public  setDeath(){
+        public setDeath(){
             this.type = GrassTypes.Dead
         }
 
         public use<T extends Creature>(plant: T): number{
             plant.die(plant, "use")
             return this.satiety
-        }
-
-        public override die<T>(creature: T): void {
-            
         }
 
     }

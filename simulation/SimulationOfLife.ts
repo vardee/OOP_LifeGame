@@ -1,3 +1,5 @@
+import { Drawable } from "../image/Drawable.js";
+
 export class SimulationMap {
     private static instance: SimulationMap;
   
@@ -33,8 +35,13 @@ export class SimulationMap {
       }
     }
   
-    public clearMap() {
-      // Реализация очистки карты
+    public clearMap(map: SimulationMap) {
+    const drawer = Drawable.getInstance()
+      for (let i = 0; i < map.getSize(); i++){
+        for (let j = 0; j < map.getSize(); j++){
+            drawer.drawObject(map, i, j, "clear")
+        }
+      }
     }
   
     public getMapCreated(): boolean {

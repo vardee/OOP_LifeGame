@@ -15,7 +15,7 @@ export class Drawable {
     }
   
     public drawObject<T>(map: SimulationMap, coordinateX: number, coordinateY: number, type: T) {
-      map.table.rows[coordinateX].cells[coordinateY].style.backgroundColor = this.getColor(type);
+        map.table.rows[coordinateX].cells[coordinateY].style.backgroundColor = this.getColor(type);
     }
   
     public drawCountOfObjects(dataBase: BruhDataBase) {
@@ -46,13 +46,11 @@ export class Drawable {
         case GrassTypes.Roses:
           return "red";
         case GrassTypes.Dead:
-            return "#FFFFFF";
         case TreeTypes.Dead:
-            return "#FFFFFF";
         case BushTypes.Dead:
-            return "#FFFFFF";
+            return "white";
         default:
-          return "#FFFFFF";
+          return "white";
       }
     }
   }
