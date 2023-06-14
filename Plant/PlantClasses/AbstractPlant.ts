@@ -5,22 +5,16 @@ import { Coordinates } from "./Coordinates.js"
 export abstract class Plant extends Creature{
         constructor(
             protected timeToDeath: number,
-            protected recoveryTime: number, 
             protected growingSpeed: number,
             protected coordinates: Coordinates,
             ){
             super(timeToDeath)
-            this.recoveryTime = recoveryTime
             this.growingSpeed = growingSpeed
             this.coordinates = coordinates
         }
         abstract grow<T>(dataBase: BruhDataBase, plant: T, tick: number)
 
-        public getRecoveryTime(): number{
-            return this.recoveryTime
-        }
-
-        public getGrowingSpeed(): number{
+        public getTimeToGrow(): number{
             return this.growingSpeed
         }
 
@@ -28,7 +22,7 @@ export abstract class Plant extends Creature{
             return this.coordinates
         }
 
-        public setGrowingSpeed(tick: number){
+        public setTimeToGrow(tick: number){
             this.growingSpeed += tick
         }
 

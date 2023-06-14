@@ -29,12 +29,12 @@ export class RandomValues {
       let randomY = randomStartY + Math.random() * distance;
     
       // Проверка на совпадение существующих координат
-      while (this.coordinatesExist(existingCoordinates, randomX, randomY)) {
+      while (this.coordinatesExist(existingCoordinates, randomX, randomY) || randomX > 100 || randomY > 100) {
         randomX = randomStartX + Math.random() * distance;
         randomY = randomStartY + Math.random() * distance;
       }
     
-      return new Coordinates(Math.round(randomX), Math.round(randomY));
+      return new Coordinates(Math.min(Math.round(randomX), 100), Math.min(Math.round(randomY), 100));
     }
     
     private getExistingCoordinates(): Coordinates[] {

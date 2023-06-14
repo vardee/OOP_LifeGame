@@ -26,7 +26,6 @@ export class Beginning{
             randomizer.createRandomValue(5, 20), 
             randomizer.createRandomValue(5, 20), 
             randomizer.createRandomValue(5, 20), 
-            randomizer.createRandomValue(5, 20), 
             randomStartPosition, TreeTypes.Oak);
 
         dataBase.addPlant(oakTree)
@@ -34,7 +33,6 @@ export class Beginning{
         treeTypesArray.forEach((type) => {
             const data = {
               [type]: new Trees(
-                randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
@@ -55,7 +53,6 @@ export class Beginning{
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
-                randomizer.createRandomValue(5, 20),
                 randomizer.createRandomCoordinate(
                   randomStartPosition.x,
                   randomStartPosition.y,
@@ -70,7 +67,6 @@ export class Beginning{
           bushTypesArray.forEach((type) => {
             const data = {
               [type]: new Bushes(
-                randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 20),

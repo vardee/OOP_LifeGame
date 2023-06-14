@@ -9,12 +9,11 @@ import { Creature } from "./creature.js";
         constructor(
             timeToDeath: number,
              protected satiety: number,
-            recoveryTime: number,
-            growingSpeed: number,
+             timeToGrow: number,
             coordinates: Coordinates,
             protected type: GrassTypes
                ){
-            super(timeToDeath, growingSpeed, recoveryTime, coordinates);
+            super(timeToDeath, timeToGrow, coordinates);
             this.satiety = satiety;
             this.type = type
         }
@@ -24,17 +23,16 @@ import { Creature } from "./creature.js";
         public override grow(dataBase: BruhDataBase, plant: any, tick: number) {
             const randomizer = RandomValues.getInstance();
 
-            if (tick === plant.getGrowingSpeed())
+            if (tick === plant.getTimeToGrow())
             {const newPlant = new Grass(
-                tick + randomizer.createRandomValue(plant.timeToDeath - 3, plant.timeToDeath + 2) * 2,
-                randomizer.createRandomValue(plant.numberOfWood - 3, plant.numberOfWood + 2),
-                randomizer.createRandomValue(plant.recoveryTime - 3, plant.recoveryTime + 2),
-                tick + randomizer.createRandomValue(plant.recoveryTime - 3, plant.recoveryTime + 2),
+                tick + randomizer.createRandomValue(plant.getTimeToDeath() - 3, plant.getTimeToDeath() + 2) * 2,
+                randomizer.createRandomValue(plant.getSatiety() - 3, plant.getSatiety() + 2),
+                tick + randomizer.createRandomValue(plant.getTimeToGrow() - 3, plant.getTimeToGrow() + 2),
                 randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3),
                 plant.getType()
                 )
             dataBase.addPlant(newPlant)
-            this.setGrowingSpeed(tick)
+            this.setTimeToGrow(tick)
         }
         }
         public override getType(){
