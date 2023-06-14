@@ -5,9 +5,9 @@ import { Drawable } from "./Drawable.js";
 export class ImageProvider{
     public getObject(dataBase: BruhDataBase, map: SimulationMap){
         const drawer = new Drawable
-        dataBase.plantArray.forEach(element => {
-            drawer.drawObject(map, element.getCoordinates().x, element.getCoordinates().y, element.getType())
-        });
+        for (let i = 0; i < dataBase.getPlantDataBaseSize(); i++){
+            drawer.drawObject(map, dataBase.getPlant(i).getCoordinates().x, dataBase.getPlant(i).getCoordinates().y, dataBase.getPlant(i).getType())
+        }
         drawer.drawCountOfObjects(dataBase)
     }
 }

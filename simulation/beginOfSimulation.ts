@@ -11,7 +11,7 @@ import { Bushes } from "../Plant/PlantClasses/Bushes.js";
 export class Beginning{
     public createPlantStarterPack(dataBase: BruhDataBase){
 
-        const randomizer = new RandomValues
+        const randomizer = RandomValues.getInstance();
 
         const treeTypesArray: TreeTypes[] = [TreeTypes.Spruce, TreeTypes.Birch];
 

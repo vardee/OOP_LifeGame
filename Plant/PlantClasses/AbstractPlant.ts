@@ -28,5 +28,9 @@ export abstract class Plant extends Creature{
             return this.coordinates
         }
 
+        public setGrowingSpeed(tick: number){
+            this.growingSpeed += tick
+        }
+
         abstract getType();
     } 

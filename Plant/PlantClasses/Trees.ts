@@ -3,15 +3,16 @@ import {Plant} from "./AbstractPlant.js";
 import { Coordinates } from "./Coordinates.js";
 import { TreeTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
+import { Timer } from "../../simulation/timer.js";
 
     export  class Trees extends Plant{
         constructor(
             timeToDeath: number,
-             protected numberOfWood: number,
-              recoveryTime: number,
-               growingSpeed: number,
-               coordinates: Coordinates,
-               protected type: TreeTypes,
+            protected numberOfWood: number,
+            recoveryTime: number,
+            growingSpeed: number,
+            coordinates: Coordinates,
+            protected type: TreeTypes,
             ){
             super(timeToDeath, growingSpeed, recoveryTime, coordinates);
             this.numberOfWood = numberOfWood;
@@ -23,9 +24,9 @@ import { RandomValues } from "../../simulation/randomValues.js";
         }
 
         public override grow(dataBase: BruhDataBase, plant: any, tick: number) {
-            const randomizer = new RandomValues
+            const randomizer = RandomValues.getInstance();
             console.log(tick, plant.getGrowingSpeed())
-            if (tick % Math.round(plant.getGrowingSpeed()) === 0)
+            if (tick === plant.getGrowingSpeed())
             {const newPlant = new Trees(
                 randomizer.createRandomValue(plant.timeToDeath - 3, plant.timeToDeath + 2) * 5,
                 randomizer.createRandomValue(plant.numberOfWood - 3, plant.numberOfWood + 2),
@@ -35,13 +36,11 @@ import { RandomValues } from "../../simulation/randomValues.js";
                 plant.getType()
                 )
             dataBase.addPlant(newPlant)
-
+            this.setGrowingSpeed(tick)
         }
         }
-        public getType(){
+        public override getType(){
             return this.type
         }
-        public setGrowingSpeed(newGrowingSpeed: number){
-            this.growingSpeed = newGrowingSpeed
-        }
+    
     }

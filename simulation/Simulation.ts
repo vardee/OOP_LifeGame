@@ -2,6 +2,7 @@ import { SimulationMap } from "./SimulationOfLife.js";
 import { BruhDataBase } from "../image/BruhDataBase.js";
 import { Beginning } from "./beginOfSimulation.js";
 import { ImageProvider } from "../image/ImageProvider.js";
+import { Timer } from "./timer.js";
  
 class Simulation{
     constructor(private simulationStarted: boolean){
@@ -10,25 +11,29 @@ class Simulation{
 
     startSimulation(){
         const map = new SimulationMap(100);
-        const dataBase = new BruhDataBase();
+        const dataBase = BruhDataBase.getInstance();
         const drawer = new ImageProvider();
         const beginOfSimulation = new Beginning
-        let tick = 0
+
+        const timer = Timer.getInstance();
+        timer.timeRunning();
+
         if (!this.simulationStarted)
         {map.createMap();
         
        beginOfSimulation.createPlantStarterPack(dataBase);
        this.simulationStarted = false
-        setInterval(() => {
-            drawer.getObject(dataBase, map)
-        }, 10000);
 
-        setInterval(() => {
-            tick++
-            dataBase.plantArray.forEach(element => {
-                element.grow(dataBase, element, tick)
-            });
-        }, 1000);
+        timer.addTickListener(() => {
+            drawer.getObject(dataBase, map)
+        });
+
+        timer.addTickListener((time) => {
+            for (let i = 0; i < dataBase.getPlantDataBaseSize(); i++) {
+              dataBase.getPlant(i).grow(dataBase, dataBase.getPlant(i), time);
+            }
+          });
+          
         this.simulationStarted = false
     }
     

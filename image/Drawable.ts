@@ -11,7 +11,7 @@ export class Drawable{
     public drawCountOfObjects(dataBase: BruhDataBase){
         const countElement = document.getElementById("count");  
         if (countElement) {
-            countElement.textContent = `Количество объектов: ${dataBase.plantArray.length}`;
+            countElement.textContent = `Количество объектов: ${dataBase.getPlantDataBaseSize()}`;
           }
     }
 
