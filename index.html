@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
-    <title>Table</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-
-        td {
-            border: 1px solid black;
-            width: 20px;
-            height: 20px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Simulation</title>
+    <link rel="stylesheet" href="table.css">
 </head>
 <body>
-<table id="myTable"></table>
-
-<script type="module" src="SimulationOfLife.js"></script>
+    <h1 id="SimulationOfLife">Simulation Of Life</h1>
+    <table id="myTable" class=table></table>
+    <script>let exports = {};</script>
+    <div id="buttons">
+        <button id="startSimulation">Start Simulation</button>
+    </div>
+    <script type="module" src='../simulation/Simulation.js'></script>
+    <div id = "count"></div>
 </body>
 </html>

@@ -1,9 +1,8 @@
-import { Coordinates } from "./Animals/Coordinates"
-import { Timer } from "simulation/timer"
+import { Timer } from "../../simulation/timer.js"
+import { Coordinates } from "./Coordinates.js"
 
-export abstract class Creature{
+export class Creature{
     constructor(
-        protected satiety: number,
         protected timeToDeath: number,
         protected coordinates: Coordinates,
         ){
@@ -25,14 +24,4 @@ export abstract class Creature{
     public getTimeToDeath(){
         return this.timeToDeath
     }
-
-    public setSatiety(newSatiety: number){
-        return this.satiety += newSatiety
-    }
-
-    public getSatiety(){
-        return this.satiety
-    }
-
-    abstract use(object: any);
 }
