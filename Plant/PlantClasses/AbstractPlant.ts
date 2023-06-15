@@ -1,5 +1,5 @@
 import { Creature } from "./creature.js"
-import { BruhDataBase } from "../../image/BruhDataBase.js"
+import { PlantDataBase } from "../../image/BruhDataBase.js"
 import { Coordinates } from "./Coordinates.js"
 
 export abstract class Plant extends Creature{
@@ -12,7 +12,7 @@ export abstract class Plant extends Creature{
             this.growingSpeed = growingSpeed
             this.coordinates = coordinates
         }
-        abstract grow<T>(dataBase: BruhDataBase, plant: T, tick: number)
+        abstract grow<T>(dataBase: PlantDataBase, plant: T, tick: number)
 
         public getTimeToGrow(): number{
             return this.growingSpeed

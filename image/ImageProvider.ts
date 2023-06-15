@@ -1,5 +1,5 @@
 import { SimulationMap } from "../simulation/SimulationOfLife.js"
-import { BruhDataBase } from "./BruhDataBase.js";
+import { PlantDataBase } from "./BruhDataBase.js";
 import { Drawable } from "./Drawable.js";
 
 export class ImageProvider {
@@ -14,9 +14,9 @@ export class ImageProvider {
       return ImageProvider.instance;
     }
   
-    public getObject(dataBase: BruhDataBase, map: SimulationMap, index) {
+    public getObject(dataBase: any, map: SimulationMap, index) {
       const drawer = Drawable.getInstance();
-        drawer.drawObject(map, dataBase.getPlant(index).getCoordinates().x, dataBase.getPlant(index).getCoordinates().y, dataBase.getPlant(index).getType());
+        drawer.drawObject(map, dataBase.getObject(index).getCoordinates().x, dataBase.getObject(index).getCoordinates().y, dataBase.getObject(index).getType());
       drawer.drawCountOfObjects(dataBase);
     }
   }

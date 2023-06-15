@@ -1,4 +1,4 @@
-import { BruhDataBase } from "../../image/BruhDataBase.js";
+import { PlantDataBase } from "../../image/BruhDataBase.js";
 import {Plant} from "./AbstractPlant.js";
 import { Coordinates } from "./Coordinates.js";
 import { GrassTypes } from "../types.js";
@@ -20,18 +20,18 @@ import { Creature } from "./creature.js";
         public getSatiety(): number{
             return this.satiety
         }
-        public override grow(dataBase: BruhDataBase, plant: any, tick: number) {
+        public override grow(dataBase: PlantDataBase, plant: any, tick: number) {
             const randomizer = RandomValues.getInstance();
 
             if (tick === plant.getTimeToGrow())
             {const newPlant = new Grass(
-                tick + randomizer.createRandomValue(plant.getTimeToDeath() - 3, plant.getTimeToDeath() + 2) * 2,
+                tick + randomizer.createRandomValue(10, 20),
                 randomizer.createRandomValue(plant.getSatiety() - 3, plant.getSatiety() + 2),
-                tick + randomizer.createRandomValue(plant.getTimeToGrow() - 3, plant.getTimeToGrow() + 2),
-                randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3),
+                tick + randomizer.createRandomValue(1, 5),
+                randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, "plant"),
                 plant.getType()
                 )
-            dataBase.addPlant(newPlant)
+            dataBase.addObject(newPlant)
             this.setTimeToGrow(tick)
         }
         }
