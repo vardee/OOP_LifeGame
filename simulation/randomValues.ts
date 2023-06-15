@@ -1,5 +1,5 @@
 import { Coordinates } from "../Plant/PlantClasses/Coordinates.js";
-import { PlantDataBase } from "../image/BruhDataBase.js";
+import { DataBaseAnimals, PlantDataBase } from "../image/BruhDataBase.js";
 import { SimulationMap } from "./Map.js";
 
 //Singleton
@@ -44,11 +44,11 @@ export class RandomValues {
     
     private getExistingCoordinates(): Coordinates[] {
       const existingCoordinates: Coordinates[] = [];
-      const database = PlantDataBase.getInstance();
+      const database = DataBaseAnimals.getInstance();
     
       for (let i = 0; i < database.getDataBaseSize(); i++) {
-        const plant = database.getObject(i);
-        existingCoordinates.push(plant.getCoordinates());
+        const animal = database.getObject(i);
+        existingCoordinates.push(animal.getCoordinates());
       }
     
       return existingCoordinates;

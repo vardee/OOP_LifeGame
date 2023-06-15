@@ -5,14 +5,16 @@ import { SimulationMap } from "../../simulation/Map.js"
 
 export abstract class Plant extends Creature{
         constructor(
+            protected satiety: number,
             protected timeToDeath: number,
             protected timeToGrow: number,
             protected coordinates: Coordinates,
             ){
-            super(timeToDeath, coordinates)
+            super(satiety, timeToDeath, coordinates)
             this.timeToGrow = timeToGrow
             this.coordinates = coordinates
         }
+        
         abstract grow<T>(dataBase: PlantDataBase, plant: T, tick: number, map: SimulationMap)
 
         public getTimeToGrow(): number{
@@ -23,10 +25,14 @@ export abstract class Plant extends Creature{
             this.timeToGrow += tick
         }
 
+        public getSatiety(){
+            return this.satiety
+        }
+
         abstract getType();
 
         abstract setDeath();
 
-        abstract use(animal: any): number
+        abstract use(animal: any)
 
     } 

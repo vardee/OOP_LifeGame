@@ -1,7 +1,7 @@
 export class Timer {
     private static instance: Timer;
     private time = 0;
-    private tickListeners: ((time: number) => void)[] = [];
+    private tickListeners: ((time: number) => any)[] = [];
   
     private constructor() {}
   
@@ -27,7 +27,7 @@ export class Timer {
         this.time = 0
     }
   
-    public addTickListener(listener: (time: number) => void) {
+    public addTickListener(listener: (time: number) => any) {
       this.tickListeners.push(listener);
     }
   

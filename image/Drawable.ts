@@ -1,6 +1,8 @@
 import { SimulationMap } from "../simulation/Map.js";
-import { PlantDataBase } from "./BruhDataBase.js";
+import { DataBaseAnimals, PlantDataBase } from "./BruhDataBase.js";
 import { BushTypes, GrassTypes, TreeTypes } from "../Plant/types.js";
+import { PredatorTypes, OmnivoresTypes, HerbivoresTypes } from "../Animals/AnimalTypes.js";
+
 
 export class Drawable {
     private static instance: Drawable;
@@ -18,10 +20,12 @@ export class Drawable {
         map.getTable().rows[coordinateX].cells[coordinateY].style.backgroundColor = this.getColor(type);
     }
   
-    public drawCountOfObjects(dataBase: any) {
+    public drawCountOfObjects() {
       const countElement = document.getElementById("count");
       if (countElement) {
-        countElement.textContent = `Количество объектов: ${dataBase.getDataBaseSize()}`;
+        const plantDataBase = PlantDataBase.getInstance()
+        const animalDataBase = DataBaseAnimals.getInstance()
+        countElement.textContent = `Количество объектов: ${plantDataBase.getDataBaseSize() + animalDataBase.getDataBaseSize()}`;
       }
     }
   
@@ -46,11 +50,32 @@ export class Drawable {
           return "#5EE329";
         case GrassTypes.Roses:
           return "#3F991C";
-        case GrassTypes.Dead:
-        case TreeTypes.Dead:
-        case BushTypes.Dead:
-            return "white";
         //Animals
+        case HerbivoresTypes.Sheep:
+            return "#FA91FF";
+          case HerbivoresTypes.Capybara:
+            return "#FA9100";
+          case HerbivoresTypes.Cow:
+            return "#872F45";
+          case OmnivoresTypes.Bear:
+            return "#AD6545";
+          case OmnivoresTypes.Hedgehog:
+            return "#784D4D";
+          case OmnivoresTypes.Rat:
+            return "#336E82";
+          case PredatorTypes.Crocodile:
+            return "#2B5927";
+          case PredatorTypes.Lynx:
+            return "#9B6363";
+          case PredatorTypes.Wolf:
+            return "#636363";  
+          case GrassTypes.Dead:
+          case TreeTypes.Dead:
+          case BushTypes.Dead:
+          case OmnivoresTypes.Dead:
+          case TreeTypes.Dead:
+          case BushTypes.Dead:
+            return "white";         
         default:
           return "white";
       }

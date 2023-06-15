@@ -3,6 +3,7 @@ import { PlantDataBase } from "../image/BruhDataBase.js";
 import { startElements } from "./starterPackForSimulation.js";
 import { ImageProvider } from "../image/ImageProvider.js";
 import { Timer } from "./timer.js";
+import { DataBaseAnimals } from "../image/BruhDataBase.js";
  
 class Simulation{
     constructor(private simulationStarted: boolean){
@@ -10,9 +11,11 @@ class Simulation{
     }
 
     public startSimulation(){
+
         const mapSize = 100
         const map =  SimulationMap.getInstance(mapSize);
         const plantDataBase = PlantDataBase.getInstance();
+        const animalDataBase = DataBaseAnimals.getInstance();
         const drawer =  ImageProvider.getInstance();
         const beginOfSimulation = new startElements
 
@@ -21,48 +24,86 @@ class Simulation{
 
         if (!this.simulationStarted){
             map.createMap(); 
-            beginOfSimulation.createStarterPack(plantDataBase, map);
+            beginOfSimulation.createStarterPack(plantDataBase, animalDataBase, map);
         }
-       this.simulationStarted = true
+
+        this.simulationStarted = true 
+        this.supportSimulation(timer, plantDataBase, animalDataBase, map, drawer)
+    }
+
+    private supportSimulation(
+        timer: Timer,
+        plantDataBase: PlantDataBase,
+        animalDataBase: DataBaseAnimals,
+        map: SimulationMap,
+        drawer: ImageProvider
+    ){
         timer.addTickListener((time) => {
             for (let i = 0; i < plantDataBase.getDataBaseSize(); i++) {
-                if (plantDataBase.getDataBaseSize() < 120){
+                if (plantDataBase.getDataBaseSize() < 180){
                     plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time, map);
                 }
                 plantDataBase.getObject(i).die(plantDataBase.getObject(i), "die");
                 drawer.getObject(plantDataBase, map, i)
                 plantDataBase.removeDeads(plantDataBase.getObject(i), i)
             }
-            for (let i = 0; i < 1; i++){ //Заготовка для Animal
-
+            for (let i = 0; i < animalDataBase.getDataBaseSize(); i++) {
+                animalDataBase.getObject(i).move();
+                if (animalDataBase.getObject(i).getHungerValue() >= 0)
+                animalDataBase.getObject(i).setHungerValue(-5);
+                if (animalDataBase.getDataBaseSize() < 110) {
+                    animalDataBase.getObject(i).reproduction(animalDataBase, timer.getTime(), map);
+                }
+                animalDataBase.getObject(i).die(animalDataBase.getObject(i), "die");
+                animalDataBase.getObject(i).eat(animalDataBase);
+                drawer.getObject(animalDataBase, map, i);
             }
           }); 
     }
+
     public endSimulation(){
         const map = SimulationMap.getInstance(100);
-        const dataBase = PlantDataBase.getInstance();
+        const plantDataBase = PlantDataBase.getInstance();
+        const animalDataBase = DataBaseAnimals.getInstance();
         map.clearMap(map)
-        dataBase.clearAll();
+        plantDataBase.clearAll();
+        animalDataBase.clearAll();
         Timer.getInstance().zeroTime()
         this.simulationStarted = false
     }
+}
 
+
+
+class Buttons {
+    constructor(private simulate: Simulation) {}
+
+    public startSimulationButton() {
+        const startSimulation = document.getElementById('startSimulation');
+
+        if (startSimulation) {
+            startSimulation.addEventListener('click', () => {
+                this.simulate.startSimulation();
+            });
+        }
+    }
+
+    public endSimulationButton() {
+        const endSimulation = document.getElementById('endSimulation');
+
+        if (endSimulation) {
+            endSimulation.addEventListener('click', () => {
+                this.simulate.endSimulation();
+            });
+        }
+    }
 }
 
 const simulate = new Simulation(false);
+const buttons = new Buttons(simulate);
 
-const startSimulation = document.getElementById('startSimulation');
+buttons.startSimulationButton();
+buttons.endSimulationButton();
 
-if (startSimulation ) {
-    startSimulation.addEventListener('click', () => {
-        simulate.startSimulation();
-    });
-}
 
-const endSimulation = document.getElementById('endSimulation');
 
-if (endSimulation ) {
-    endSimulation.addEventListener('click', () => {
-        simulate.endSimulation();
-    });
-}

@@ -14,9 +14,9 @@ export class ImageProvider {
       return ImageProvider.instance;
     }
   
-    public getObject(dataBase: any, map: SimulationMap, index) {
+    public getObject(dataBase: any, map: SimulationMap, index: number) {
       const drawer = Drawable.getInstance();
         drawer.drawObject(map, dataBase.getObject(index).getCoordinates().x, dataBase.getObject(index).getCoordinates().y, dataBase.getObject(index).getType());
-      drawer.drawCountOfObjects(dataBase);
+      drawer.drawCountOfObjects();
     }
   }

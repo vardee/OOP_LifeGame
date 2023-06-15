@@ -3,6 +3,7 @@ import { Coordinates } from "./Coordinates.js"
 
 export class Creature{
     constructor(
+        protected satiety: number,
         protected timeToDeath: number,
         protected coordinates: Coordinates,
         ){
@@ -10,6 +11,7 @@ export class Creature{
         this.coordinates = coordinates
 
     }
+    
     public die(creature: any, reason: string){
         const tick = Timer.getInstance()
         if (creature.getTimeToDeath() === tick.getTime() || reason === "use"){

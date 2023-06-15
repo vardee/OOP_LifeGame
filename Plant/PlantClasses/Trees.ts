@@ -3,18 +3,18 @@ import {Plant} from "./AbstractPlant.js";
 import { Coordinates } from "./Coordinates.js";
 import { TreeTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
-import { Creature } from "./creature.js";
 import { SimulationMap } from "../../simulation/Map.js";
 
     export  class Trees extends Plant{
         constructor(
+            satiety: number,
             timeToDeath: number,
             protected numberOfWood: number,
             timeToGrow: number,
             coordinates: Coordinates,
             protected type: TreeTypes,
             ){
-            super(timeToDeath, timeToGrow, coordinates);
+            super(satiety, timeToDeath, timeToGrow, coordinates);
             this.numberOfWood = numberOfWood;
             this.type = type
         }
@@ -27,6 +27,7 @@ import { SimulationMap } from "../../simulation/Map.js";
             const randomizer = RandomValues.getInstance();
             if (tick === plant.getTimeToGrow())
             {const newPlant = new Trees(
+                randomizer.createRandomValue(10, 20),
                 tick + randomizer.createRandomValue(10, 20),
                 randomizer.createRandomValue(plant.getNumberOfWoods() - 3, plant.getNumberOfWoods() + 2),
                 tick + randomizer.createRandomValue(1, 7),
@@ -45,8 +46,8 @@ import { SimulationMap } from "../../simulation/Map.js";
             this.type = TreeTypes.Dead
         }
 
-        public override use <T extends Creature>(animal: any): number{
+        public override use (animal: any){
+            animal.setHungerValue(this.satiety)
             this.die(this, "use")
-            return this.numberOfWood     
         }
     }

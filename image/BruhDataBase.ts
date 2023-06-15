@@ -1,4 +1,5 @@
-import { Plant } from "../Plant/PlantClasses/AbstractPlant.js"
+import { Plant } from "../Plant/PlantClasses/AbstractPlant"
+import { Animal } from "../Animals/AnimalsObjects/AnimalsAbstractClass"
 
 
 interface DataBase{
@@ -9,8 +10,6 @@ interface DataBase{
   clearAll()
 }
 
-
-//Singleton
 
 export class PlantDataBase implements DataBase{
   private static instance: PlantDataBase;
@@ -47,27 +46,43 @@ export class PlantDataBase implements DataBase{
   }
 }
 
+export class DataBaseAnimals  implements DataBase{
+  private static instance: DataBaseAnimals;
+  private animalArray: Animal[] = [];
 
+  private constructor() {}
 
-// export class AnimalDataBase implements DataBase{
+  public static getInstance(): DataBaseAnimals {
+    if (!DataBaseAnimals.instance) {
+      DataBaseAnimals.instance = new DataBaseAnimals();
+    }
+    return DataBaseAnimals.instance;
+  }
 
-//   private animalArray: Animals[] = [];
+  public addObject(animal: Animal) {
+    this.animalArray.push(animal);
+  }
 
-//    public addObject(plant: Animals) {
-//     this.animalArray.push(plant);
-//   }
+  public removeDeads(animal: Animal) {
+    const coordinatesToRemove = animal.getCoordinates();
+    for (let i = 0; i < this.animalArray.length; i++) {
+      const currentAnimal = this.animalArray[i];
+      if (currentAnimal.getCoordinates() === coordinatesToRemove) {
+        this.animalArray.splice(i, 1);
+        break;
+      }
+    }
+  }
 
-//   public removeDeads(animal: any, index) {
-//       if (animal.getType().toString() === "Dead") {
-//         this.animalArray.splice(index, 1);
-//       }
-//   }
+  public getObject(index: number): Animal{
+      return this.animalArray[index]
+  }
+  public getDataBaseSize(): number{
+    return this.animalArray.length
+  }
 
-//   public getObject(index: number): Animals{
-//       return this.animalArray[index]
-//   }
-//   public getDataBaseSize(): number{
-//     return this.animalArray.length
-//   }
-// }
+  public clearAll(){
+    this.animalArray = [];
+  }
+}
 
