@@ -4,6 +4,7 @@ import { Coordinates } from "./Coordinates.js";
 import { TreeTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
 import { Creature } from "./creature.js";
+import { SimulationMap } from "../../simulation/Map.js";
 
     export  class Trees extends Plant{
         constructor(
@@ -22,14 +23,14 @@ import { Creature } from "./creature.js";
             return this.numberOfWood
         }
 
-        public override grow(dataBase: PlantDataBase, plant: any, tick: number) {
+        public override grow(dataBase: PlantDataBase, plant: any, tick: number, map: SimulationMap) {
             const randomizer = RandomValues.getInstance();
             if (tick === plant.getTimeToGrow())
             {const newPlant = new Trees(
                 tick + randomizer.createRandomValue(10, 20),
                 randomizer.createRandomValue(plant.getNumberOfWoods() - 3, plant.getNumberOfWoods() + 2),
                 tick + randomizer.createRandomValue(1, 7),
-                randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, plant),
+                randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, plant, map),
                 plant.getType()
                 )
             dataBase.addObject(newPlant)
@@ -44,8 +45,8 @@ import { Creature } from "./creature.js";
             this.type = TreeTypes.Dead
         }
 
-        public override use <T extends Creature>(plant: T): number{
-            plant.die(plant, "use")
+        public override use <T extends Creature>(animal: any): number{
+            this.die(this, "use")
             return this.numberOfWood     
         }
     }

@@ -3,7 +3,7 @@ import { Drawable } from "../image/Drawable.js";
 export class SimulationMap {
     private static instance: SimulationMap;
   
-    public table: HTMLTableElement;
+    private table: HTMLTableElement;
     private mapCreated: boolean;
     private size: number;
   
@@ -50,6 +50,10 @@ export class SimulationMap {
   
     public getSize(): number {
       return this.size;
+    }
+
+    public getTable(): HTMLTableElement{
+      return this.table
     }
   }
 

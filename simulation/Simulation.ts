@@ -1,6 +1,6 @@
-import { SimulationMap } from "./SimulationOfLife.js";
+import { SimulationMap } from "./Map.js";
 import { PlantDataBase } from "../image/BruhDataBase.js";
-import { Beginning } from "./beginOfSimulation.js";
+import { startElements } from "./starterPackForSimulation.js";
 import { ImageProvider } from "../image/ImageProvider.js";
 import { Timer } from "./timer.js";
  
@@ -9,24 +9,25 @@ class Simulation{
         simulationStarted = this.simulationStarted
     }
 
-    startSimulation(){
-        const map =  SimulationMap.getInstance(100);
+    public startSimulation(){
+        const mapSize = 100
+        const map =  SimulationMap.getInstance(mapSize);
         const plantDataBase = PlantDataBase.getInstance();
         const drawer =  ImageProvider.getInstance();
-        const beginOfSimulation = new Beginning
+        const beginOfSimulation = new startElements
 
         const timer = Timer.getInstance();
         timer.timeRunning();
 
         if (!this.simulationStarted){
             map.createMap(); 
-            beginOfSimulation.createPlantStarterPack(plantDataBase);
+            beginOfSimulation.createStarterPack(plantDataBase, map);
         }
        this.simulationStarted = true
         timer.addTickListener((time) => {
             for (let i = 0; i < plantDataBase.getDataBaseSize(); i++) {
-                if (plantDataBase.getDataBaseSize() < 200){
-                    plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time);
+                if (plantDataBase.getDataBaseSize() < 120){
+                    plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time, map);
                 }
                 plantDataBase.getObject(i).die(plantDataBase.getObject(i), "die");
                 drawer.getObject(plantDataBase, map, i)
@@ -37,13 +38,15 @@ class Simulation{
             }
           }); 
     }
-    endSimulation(){
+    public endSimulation(){
         const map = SimulationMap.getInstance(100);
         const dataBase = PlantDataBase.getInstance();
         map.clearMap(map)
         dataBase.clearAll();
+        Timer.getInstance().zeroTime()
         this.simulationStarted = false
     }
+
 }
 
 const simulate = new Simulation(false);

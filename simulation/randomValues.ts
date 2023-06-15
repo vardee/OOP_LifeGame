@@ -1,5 +1,6 @@
 import { Coordinates } from "../Plant/PlantClasses/Coordinates.js";
 import { PlantDataBase } from "../image/BruhDataBase.js";
+import { SimulationMap } from "./Map.js";
 
 //Singleton
 
@@ -24,19 +25,21 @@ export class RandomValues {
       randomStartY: number,
       distance: number,
       type: string,
+      map: SimulationMap
     ): Coordinates {
       let randomX = randomStartX + Math.random() * distance;
       let randomY = randomStartY + Math.random() * distance;
+      
     
       if (type != "plant"){
         const existingCoordinates = this.getExistingCoordinates();
-       while (this.coordinatesExist(existingCoordinates, randomX, randomY) || randomX > 100 || randomY > 100) {
+       while (this.coordinatesExist(existingCoordinates, randomX, randomY) || randomX > map.getSize() || randomY > map.getSize()) {
         randomX = randomStartX + Math.random() * distance;
         randomY = randomStartY + Math.random() * distance;
       }
     }
     
-      return new Coordinates(Math.min(Math.round(randomX), 100), Math.min(Math.round(randomY), 100));
+      return new Coordinates(Math.min(Math.round(randomX), map.getSize()), Math.min(Math.round(randomY), map.getSize()));
     }
     
     private getExistingCoordinates(): Coordinates[] {

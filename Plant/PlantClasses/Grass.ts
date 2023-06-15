@@ -4,6 +4,7 @@ import { Coordinates } from "./Coordinates.js";
 import { GrassTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
 import { Creature } from "./creature.js";
+import { SimulationMap } from "../../simulation/Map.js";
 
     export class Grass extends Plant{
         constructor(
@@ -20,7 +21,7 @@ import { Creature } from "./creature.js";
         public getSatiety(): number{
             return this.satiety
         }
-        public override grow(dataBase: PlantDataBase, plant: any, tick: number) {
+        public override grow(dataBase: PlantDataBase, plant: any, tick: number, map: SimulationMap) {
             const randomizer = RandomValues.getInstance();
 
             if (tick === plant.getTimeToGrow())
@@ -28,7 +29,7 @@ import { Creature } from "./creature.js";
                 tick + randomizer.createRandomValue(10, 20),
                 randomizer.createRandomValue(plant.getSatiety() - 3, plant.getSatiety() + 2),
                 tick + randomizer.createRandomValue(1, 5),
-                randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, "plant"),
+                randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, "plant", map),
                 plant.getType()
                 )
             dataBase.addObject(newPlant)
@@ -43,8 +44,8 @@ import { Creature } from "./creature.js";
             this.type = GrassTypes.Dead
         }
 
-        public use<T extends Creature>(plant: T): number{
-            plant.die(plant, "use")
+        public use(animal: any): number{
+            this.die(this, "use")
             return this.satiety
         }
 

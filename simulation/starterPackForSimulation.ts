@@ -7,9 +7,15 @@ import { Trees } from "../Plant/PlantClasses/Trees.js";
 import { PlantDataBase } from "../image/BruhDataBase.js";
 import { Grass } from "../Plant/PlantClasses/Grass.js";
 import { Bushes } from "../Plant/PlantClasses/Bushes.js";
+import { SimulationMap } from "./Map.js";
 
-export class Beginning{
-    public createPlantStarterPack(dataBase: PlantDataBase){
+export class startElements{
+
+    public createStarterPack(dataBase: PlantDataBase, map: SimulationMap){
+      this.createPlantStarterPack(dataBase, map)
+    }
+
+    private createPlantStarterPack(dataBase: PlantDataBase, map: SimulationMap){
 
         const randomizer = RandomValues.getInstance();
 
@@ -20,7 +26,7 @@ export class Beginning{
         const bushTypesArray: BushTypes[] = [BushTypes.Currant, BushTypes.Hawthorn, BushTypes.Raspberries];
 
         let randomStartPosition: Coordinates 
-        randomStartPosition = randomizer.createRandomCoordinate(randomizer.createRandomValue(5, 20), randomizer.createRandomValue(5, 70), 1, "")
+        randomStartPosition = randomizer.createRandomCoordinate(randomizer.createRandomValue(5, 20), randomizer.createRandomValue(5, 70), 1, "", map)
         
         const oakTree = new Trees(
             randomizer.createRandomValue(12, 20), 
@@ -40,7 +46,8 @@ export class Beginning{
                   randomStartPosition.x,
                   randomStartPosition.y,
                   randomizer.createRandomValue(5, 20),
-                  ""
+                  "",
+                  map
                 ),
                 TreeTypes[type as keyof typeof TreeTypes]
               )
@@ -58,7 +65,8 @@ export class Beginning{
                   randomStartPosition.x,
                   randomStartPosition.y,
                   randomizer.createRandomValue(5, 20),
-                  ""
+                  "",
+                  map
                 ),
                 GrassTypes[type as keyof typeof GrassTypes]
               )
@@ -75,7 +83,8 @@ export class Beginning{
                   randomStartPosition.x,
                   randomStartPosition.y,
                   randomizer.createRandomValue(5, 20),
-                  ""
+                  "",
+                  map
                 ),
                 BushTypes[type as keyof typeof BushTypes]
               )

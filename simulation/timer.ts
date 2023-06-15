@@ -22,6 +22,10 @@ export class Timer {
     public getTime(): number {
       return this.time;
     }
+
+    public zeroTime(){
+        this.time = 0
+    }
   
     public addTickListener(listener: (time: number) => void) {
       this.tickListeners.push(listener);

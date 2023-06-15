@@ -1,4 +1,4 @@
-import { SimulationMap } from "../simulation/SimulationOfLife.js"
+import { SimulationMap } from "../simulation/Map.js"
 import { PlantDataBase } from "./BruhDataBase.js";
 import { Drawable } from "./Drawable.js";
 

@@ -1,4 +1,4 @@
-import { SimulationMap } from "../simulation/SimulationOfLife.js";
+import { SimulationMap } from "../simulation/Map.js";
 import { PlantDataBase } from "./BruhDataBase.js";
 import { BushTypes, GrassTypes, TreeTypes } from "../Plant/types.js";
 
@@ -15,7 +15,7 @@ export class Drawable {
     }
   
     public drawObject<T>(map: SimulationMap, coordinateX: number, coordinateY: number, type: T) {
-        map.table.rows[coordinateX].cells[coordinateY].style.backgroundColor = this.getColor(type);
+        map.getTable().rows[coordinateX].cells[coordinateY].style.backgroundColor = this.getColor(type);
     }
   
     public drawCountOfObjects(dataBase: any) {
@@ -27,6 +27,7 @@ export class Drawable {
   
     private getColor<T>(type: T): string {
       switch (type) {
+        //Plants
         case TreeTypes.Oak:
           return "#4DF0D4";
         case TreeTypes.Birch:
@@ -49,6 +50,7 @@ export class Drawable {
         case TreeTypes.Dead:
         case BushTypes.Dead:
             return "white";
+        //Animals
         default:
           return "white";
       }
