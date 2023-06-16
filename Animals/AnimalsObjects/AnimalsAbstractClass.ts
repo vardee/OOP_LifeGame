@@ -30,7 +30,6 @@ export abstract class Animal extends Creature {
         this.hungerValue = hungerValue;
     }
 
-
     abstract eat(dataBase: any)
 
     abstract reproduction(dataBase: DataBaseAnimals, tick: number, map: SimulationMap)
@@ -93,7 +92,7 @@ export abstract class Animal extends Creature {
       const map = SimulationMap.getInstance(100);
       const currentCoordinates = this.getCoordinates();
       const randomizer = RandomValues.getInstance();
-      this.setCoordinates(randomizer.createRandomCoordinate(objectToTeleport.getCoordinates().x, objectToTeleport.getCoordinates().y, 3, '', map));
+      this.setCoordinates(randomizer.createRandomCoordinate(objectToTeleport.getCoordinates().x, objectToTeleport.getCoordinates().y, 10, '', map));
       drawable.drawObject(map, currentCoordinates.x, currentCoordinates.y, "");
     }
 

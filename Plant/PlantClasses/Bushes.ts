@@ -10,11 +10,11 @@ import { SimulationMap } from "../../simulation/Map.js";
             satiety: number,
             timeToDeath: number, 
             protected damage: number,
-              timeToGrow: number,
-              coordinates: Coordinates,
-              protected type: BushTypes
+            timeToMultiply: number,
+            coordinates: Coordinates,
+            protected type: BushTypes
               ){
-            super(satiety, timeToDeath, timeToGrow, coordinates)
+            super(timeToMultiply, satiety, timeToDeath, coordinates)
             this.damage = damage;
             this.type = type
         }

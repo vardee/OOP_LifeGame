@@ -33,13 +33,13 @@ export class RandomValues {
     
       if (type != "plant"){
         const existingCoordinates = this.getExistingCoordinates();
-       while (this.coordinatesExist(existingCoordinates, randomX, randomY) || randomX > map.getSize() || randomY > map.getSize()) {
+       while (this.coordinatesExist(existingCoordinates, randomX, randomY) || randomX >= map.getSize() || randomY >= map.getSize()) {
         randomX = randomStartX + Math.random() * distance;
         randomY = randomStartY + Math.random() * distance;
       }
     }
     
-      return new Coordinates(Math.min(Math.round(randomX), map.getSize()), Math.min(Math.round(randomY), map.getSize()));
+      return new Coordinates(Math.min(Math.round(randomX), map.getSize() - 1), Math.min(Math.round(randomY), map.getSize() - 1));
     }
     
     private getExistingCoordinates(): Coordinates[] {

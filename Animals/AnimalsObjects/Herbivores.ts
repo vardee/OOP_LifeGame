@@ -42,7 +42,7 @@ export class Herbivores extends Animal{
             randomizer.createRandomValue(60, 100),
             randomizer.createRandomValue(60, 100),
             tick + randomizer.createRandomValue(60, 100),
-            randomizer.createRandomCoordinate(this.getCoordinates().x, this.getCoordinates().y, 1, '', map),
+            randomizer.createRandomCoordinate(this.getCoordinates().x, this.getCoordinates().y, 20, '', map),
             this.getType()
           );
     

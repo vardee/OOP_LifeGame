@@ -73,8 +73,8 @@ export class Drawable {
           case TreeTypes.Dead:
           case BushTypes.Dead:
           case OmnivoresTypes.Dead:
-          case TreeTypes.Dead:
-          case BushTypes.Dead:
+          case PredatorTypes.Dead:
+          case HerbivoresTypes.Dead:
             return "white";         
         default:
           return "white";

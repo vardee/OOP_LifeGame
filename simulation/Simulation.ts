@@ -39,24 +39,23 @@ class Simulation{
         drawer: ImageProvider
     ){
         timer.addTickListener((time) => {
+           // drawer.drawMap(map)
             for (let i = 0; i < plantDataBase.getDataBaseSize(); i++) {
-                if (plantDataBase.getDataBaseSize() < 180){
+                if (plantDataBase.getDataBaseSize() < 110)
                     plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time, map);
-                }
                 plantDataBase.getObject(i).die(plantDataBase.getObject(i), "die");
                 drawer.getObject(plantDataBase, map, i)
                 plantDataBase.removeDeads(plantDataBase.getObject(i), i)
-            }
-            for (let i = 0; i < animalDataBase.getDataBaseSize(); i++) {
-                animalDataBase.getObject(i).move();
-                if (animalDataBase.getObject(i).getHungerValue() >= 0)
-                animalDataBase.getObject(i).setHungerValue(-5);
-                if (animalDataBase.getDataBaseSize() < 110) {
-                    animalDataBase.getObject(i).reproduction(animalDataBase, timer.getTime(), map);
-                }
-                animalDataBase.getObject(i).die(animalDataBase.getObject(i), "die");
-                animalDataBase.getObject(i).eat(animalDataBase);
-                drawer.getObject(animalDataBase, map, i);
+        }
+                for (let i = 0; i < animalDataBase.getDataBaseSize(); i++) {
+                    animalDataBase.getObject(i).move();
+                    if (animalDataBase.getObject(i).getHungerValue() >= 0)
+                        animalDataBase.getObject(i).setHungerValue(-5);
+                    if (animalDataBase.getDataBaseSize() < 110) {
+                        animalDataBase.getObject(i).reproduction(animalDataBase, timer.getTime(), map);
+                    }
+                    animalDataBase.getObject(i).eat(animalDataBase);
+                    drawer.getObject(animalDataBase, map, i);
             }
           }); 
     }

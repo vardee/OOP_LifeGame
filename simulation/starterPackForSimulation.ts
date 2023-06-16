@@ -35,7 +35,7 @@ export class startElements{
         randomStartPosition = randomizer.createRandomCoordinate(randomizer.createRandomValue(5, 20), randomizer.createRandomValue(5, 70), 1, "", map)
         
         const oakTree = new Trees(
-          randomizer.createRandomValue(12, 20), 
+          randomizer.createRandomValue(3, 8), 
             randomizer.createRandomValue(12, 20), 
             randomizer.createRandomValue(5, 20), 
             randomizer.createRandomValue(5, 8), 
@@ -46,7 +46,7 @@ export class startElements{
         treeTypesArray.forEach((type) => {
             const data = {
               [type]: new Trees(
-                randomizer.createRandomValue(12, 20),
+                randomizer.createRandomValue(3, 8),
                 randomizer.createRandomValue(12, 20),
                 randomizer.createRandomValue(5, 20),
                 randomizer.createRandomValue(5, 8),
