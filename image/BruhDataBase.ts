@@ -1,5 +1,6 @@
 import { Plant } from "../Plant/PlantClasses/AbstractPlant"
 import { Animal } from "../Animals/AnimalsObjects/AnimalsAbstractClass"
+import { Building } from "../Animals/Building/building"
 
 
 interface DataBase{
@@ -85,4 +86,84 @@ export class DataBaseAnimals  implements DataBase{
     this.animalArray = [];
   }
 }
+
+export class HumanDataBase  implements DataBase{
+  private static instance: HumanDataBase;
+  private humanArray: Animal[] = [];
+
+  private constructor() {}
+
+  public static getInstance(): HumanDataBase {
+    if (!HumanDataBase.instance) {
+      HumanDataBase.instance = new HumanDataBase();
+    }
+    return HumanDataBase.instance;
+  }
+
+  public addObject(animal: Animal) {
+    this.humanArray.push(animal);
+  }
+
+  public removeDeads(human: Animal) {
+    const coordinatesToRemove = human.getCoordinates();
+    for (let i = 0; i < this.humanArray.length; i++) {
+      const currentAnimal = this.humanArray[i];
+      if (currentAnimal.getCoordinates() === coordinatesToRemove) {
+        this.humanArray.splice(i, 1);
+        break;
+      }
+    }
+  }
+
+  public getObject(index: number): Animal{
+      return this.humanArray[index]
+  }
+  public getDataBaseSize(): number{
+    return this.humanArray.length
+  }
+
+  public clearAll(){
+    this.humanArray = [];
+  }
+}
+
+// export class BuildingDataBase  implements DataBase{
+//   private static instance: BuildingDataBase;
+//   private buildingArray: Building[] = [];
+
+//   private constructor() {}
+
+//   public static getInstance(): BuildingDataBase {
+//     if (!BuildingDataBase.instance) {
+//       BuildingDataBase.instance = new BuildingDataBase();
+//     }
+//     return BuildingDataBase.instance;
+//   }
+
+//   public addObject(animal: Animal) {
+//     this.buildingArray.push(animal);
+//   }
+
+//   public removeDeads(building: Building) {
+//     const coordinatesToRemove = building.getCoordinates();
+//     for (let i = 0; i < this.buildingArray.length; i++) {
+//       const currentBuilding = this.buildingArray[i];
+//       if (currentBuilding.getCoordinates() === coordinatesToRemove) {
+//         this.buildingArray.splice(i, 1);
+//         break;
+//       }
+//     }
+//   }
+
+//   public getObject(index: number): Building{
+//       return this.buildingArray[index]
+//   }
+//   public getDataBaseSize(): number{
+//     return this.buildingArray.length
+//   }
+
+//   public clearAll(){
+//     this.buildingArray = [];
+//   }
+// }
 

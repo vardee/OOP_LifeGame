@@ -53,7 +53,6 @@ class Simulation{
             for (let i = 0; i < plantDataBase.getDataBaseSize(); i++) {
                 if (plantDataBase.getDataBaseSize() < 250)
                     plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time, map);
-            //    plantDataBase.getObject(i).die(plantDataBase.getObject(i), "die");
                 drawer.getObject(plantDataBase, map, i)
                 plantDataBase.removeDeads(plantDataBase.getObject(i), i)
         }

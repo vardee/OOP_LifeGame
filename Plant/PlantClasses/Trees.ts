@@ -4,6 +4,7 @@ import { Coordinates } from "./Coordinates.js";
 import { TreeTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
 import { SimulationMap } from "../../simulation/Map.js";
+import { HumanType } from "../../Animals/AnimalTypes.js";
 
     export  class Trees extends Plant{
         constructor(
@@ -47,7 +48,10 @@ import { SimulationMap } from "../../simulation/Map.js";
         }
 
         public override use (animal: any){
-            animal.setHungerValue(this.satiety)
+            if (animal.getType() !== HumanType.Human)
+                animal.setHungerValue(this.satiety)
+            else 
+                animal.setWoodInHands(this.numberOfWood)
             this.die(this, "use")
         }
     }
