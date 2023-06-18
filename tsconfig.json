@@ -1,12 +1,7 @@
 {
-  "compileOnSave": true,
-  "moduleResolution": "nodenext",
-  "compilerOptions": {
-      "target": "ES2022",
-      "baseUrl": "./",
-      "paths": {
-        "*": ["src/*"]
-      }
-  },
-  "outDir": "D:/VisualCodeProject/OOP-OOP-2023-OOP2023Team26/bulid",
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "ES2022",
+    },
+    "outDir": "D:/VisualCodeProject/OOP-OOP-2023-OOP2023Team26/bulid",
 }

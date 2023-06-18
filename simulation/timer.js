@@ -18,6 +18,9 @@ export class Timer {
     getTime() {
         return this.time;
     }
+    zeroTime() {
+        this.time = 0;
+    }
     addTickListener(listener) {
         this.tickListeners.push(listener);
     }

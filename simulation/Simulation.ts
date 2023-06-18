@@ -1,63 +1,131 @@
-import { SimulationMap } from "../ts/ts/SimulationOfLife.js";
-import { DataBaseAnimals } from "../ts/ts/DataBaseAnimals.js";
-import { Beginning } from "./beginOfSimulation.js";
-import { ImageProvider } from "../image/imageProvider.js";
+import { SimulationMap } from "./Map.js";
+import { PlantDataBase } from "../image/BruhDataBase.js";
+import { startElements } from "./starterPackForSimulation.js";
+import { ImageProvider } from "../image/ImageProvider.js";
 import { Timer } from "./timer.js";
+import { DataBaseAnimals } from "../image/BruhDataBase.js";
+import { HumanDataBase } from "../image/BruhDataBase.js";
+import { Human } from "../Animals/AnimalsObjects/Human.js";
  
 class Simulation{
     constructor(private simulationStarted: boolean){
         simulationStarted = this.simulationStarted
     }
 
-    startSimulation(){
-        const map =  SimulationMap.getInstance(100);
-        const dataBase = DataBaseAnimals.getInstance();
-        const drawer = ImageProvider.getInstance();
-        const beginOfSimulation = new Beginning
+    public startSimulation(){
+
+        const mapSize = 100
+        const map =  SimulationMap.getInstance(mapSize);
+        const plantDataBase = PlantDataBase.getInstance();
+        const animalDataBase = DataBaseAnimals.getInstance();
+        const humanDataBase = HumanDataBase.getInstance();
+        const drawer =  ImageProvider.getInstance();
+        const beginOfSimulation = new startElements
 
         const timer = Timer.getInstance();
         timer.timeRunning();
 
-        if (!this.simulationStarted)
-        {map.createMap();
-        
-       beginOfSimulation.createPlantStarterPack(dataBase);
-       this.simulationStarted = false
-
-       timer.addTickListener((time) => {
-        for (let i = 0; i < dataBase.getAnimalDataBaseSize(); i++) {
-            drawer.getObject(dataBase, map, i)
+        if (!this.simulationStarted){
+            map.createMap(); 
+            beginOfSimulation.createStarterPack(plantDataBase, animalDataBase, humanDataBase, map);
         }
-        });
 
+        this.simulationStarted = true 
+        this.supportSimulation(timer, plantDataBase, animalDataBase, humanDataBase, map, drawer)
+    }
+
+    private supportSimulation(
+        timer: Timer,
+        plantDataBase: PlantDataBase,
+        animalDataBase: DataBaseAnimals,
+        humanDataBase : HumanDataBase,
+        map: SimulationMap,
+        drawer: ImageProvider
+    ){
         timer.addTickListener((time) => {
-            for (let i = 0; i < dataBase.getAnimalDataBaseSize(); i++) {
-              dataBase.getAnimal(i).move();
-              if(dataBase.getAnimal(i).getHungerValue() >= 0)
-              dataBase.getAnimal(i).setHungerValue(-10)
-              if (dataBase.getAnimalDataBaseSize() < 110){
-                dataBase.getAnimal(i).reproduction(dataBase, timer.getTime(), map);
+           // drawer.drawMap(map)
+           for (let i = 0; i < animalDataBase.getDataBaseSize(); i++) {
+            animalDataBase.getObject(i).move();
+            if (animalDataBase.getObject(i).getHungerValue() >= 0)
+                animalDataBase.getObject(i).setHungerValue(-5);
+            if (animalDataBase.getDataBaseSize() < 70) {
+                animalDataBase.getObject(i).reproduction(animalDataBase, timer.getTime(), map);
             }
-              drawer.getObject(dataBase, map, i)
-              
+            animalDataBase.getObject(i).eat(plantDataBase);
+            drawer.getObject(animalDataBase, map, i);
+    }
+            for (let i = 0; i < plantDataBase.getDataBaseSize(); i++) {
+                if (plantDataBase.getDataBaseSize() < 250)
+                    plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time, map);
+                drawer.getObject(plantDataBase, map, i)
+                plantDataBase.removeDeads(plantDataBase.getObject(i), i)
+        }
+        for (let i = 0; i < humanDataBase.getDataBaseSize(); i++) {
+            humanDataBase.getObject(i).move();
+            if(humanDataBase.getObject(i).getWoodInHands() < 100){
+                humanDataBase.getObject(i).getWood(plantDataBase);
             }
-          });
-          
+            if(humanDataBase.getObject(i).getWoodInHands() >= 100){
+                humanDataBase.getObject(i).setCountOfWood(-100)
+            }
+            if (humanDataBase.getObject(i).getHungerValue() >= 0)
+                humanDataBase.getObject(i).setHungerValue(-5);
+            if (humanDataBase.getDataBaseSize() < 70) {
+                humanDataBase.getObject(i).reproduction(humanDataBase, timer.getTime(), map);
+            }
+            humanDataBase.getObject(i).eat(plantDataBase);
+            drawer.getObject(humanDataBase, map, i);
+            console.log(humanDataBase.getObject(i).getName());
+            console.log(humanDataBase.getObject(i).getWoodInHands())
+    }
+          }); 
+    }
+
+    public endSimulation(){
+        const map = SimulationMap.getInstance(100);
+        const plantDataBase = PlantDataBase.getInstance();
+        const animalDataBase = DataBaseAnimals.getInstance();
+        const humanDataBase = HumanDataBase.getInstance();
+        map.clearMap(map)
+        plantDataBase.clearAll();
+        animalDataBase.clearAll();
+        humanDataBase.clearAll();
+        Timer.getInstance().zeroTime()
         this.simulationStarted = false
     }
-    
+}
+
+
+
+class Buttons {
+    constructor(private simulate: Simulation) {}
+
+    public startSimulationButton() {
+        const startSimulation = document.getElementById('startSimulation');
+
+        if (startSimulation) {
+            startSimulation.addEventListener('click', () => {
+                this.simulate.startSimulation();
+            });
+        }
     }
 
-    endSimulation(){
+    public endSimulationButton() {
+        const endSimulation = document.getElementById('endSimulation');
+
+        if (endSimulation) {
+            endSimulation.addEventListener('click', () => {
+                this.simulate.endSimulation();
+            });
+        }
     }
 }
 
 const simulate = new Simulation(false);
+const buttons = new Buttons(simulate);
 
-const startSimulation = document.getElementById('startSimulation');
+buttons.startSimulationButton();
+buttons.endSimulationButton();
 
-if (startSimulation ) {
-    startSimulation.addEventListener('click', () => {
-        simulate.startSimulation();
-    });
-}
+
+
