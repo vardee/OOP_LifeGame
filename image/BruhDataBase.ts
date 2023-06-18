@@ -1,6 +1,7 @@
 import { Plant } from "../Plant/PlantClasses/AbstractPlant"
 import { Animal } from "../Animals/AnimalsObjects/AnimalsAbstractClass"
-import { Building } from "../Animals/Building/building"
+//import { Building } from "../Animals/Building/building"
+import { Human } from "../Animals/AnimalsObjects/Humans"
 
 
 interface DataBase{
@@ -64,17 +65,11 @@ export class DataBaseAnimals  implements DataBase{
     this.animalArray.push(animal);
   }
 
-  public removeDeads(animal: Animal) {
-    const coordinatesToRemove = animal.getCoordinates();
-    for (let i = 0; i < this.animalArray.length; i++) {
-      const currentAnimal = this.animalArray[i];
-      if (currentAnimal.getCoordinates() === coordinatesToRemove) {
-        this.animalArray.splice(i, 1);
-        break;
-      }
+  public removeDeads(plant: any, index) {
+    if (plant.getType().toString() === "Dead") {
+      this.animalArray.splice(index, 1);
     }
-  }
-
+}
   public getObject(index: number): Animal{
       return this.animalArray[index]
   }
@@ -87,9 +82,9 @@ export class DataBaseAnimals  implements DataBase{
   }
 }
 
-export class HumanDataBase  implements DataBase{
+export class HumanDataBase implements DataBase{
   private static instance: HumanDataBase;
-  private humanArray: Animal[] = [];
+  private humanArray: Human[] = [];
 
   private constructor() {}
 
@@ -100,22 +95,17 @@ export class HumanDataBase  implements DataBase{
     return HumanDataBase.instance;
   }
 
-  public addObject(animal: Animal) {
+  public addObject(animal: Human) {
     this.humanArray.push(animal);
   }
 
-  public removeDeads(human: Animal) {
-    const coordinatesToRemove = human.getCoordinates();
-    for (let i = 0; i < this.humanArray.length; i++) {
-      const currentAnimal = this.humanArray[i];
-      if (currentAnimal.getCoordinates() === coordinatesToRemove) {
-        this.humanArray.splice(i, 1);
-        break;
-      }
+  public removeDeads(human: any, index) {
+    if (human.getType().toString() === "Dead") {
+      this.humanArray.splice(index, 1);
     }
-  }
+}
 
-  public getObject(index: number): Animal{
+  public getObject(index: number): Human{
       return this.humanArray[index]
   }
   public getDataBaseSize(): number{
@@ -126,6 +116,7 @@ export class HumanDataBase  implements DataBase{
     this.humanArray = [];
   }
 }
+
 
 // export class BuildingDataBase  implements DataBase{
 //   private static instance: BuildingDataBase;

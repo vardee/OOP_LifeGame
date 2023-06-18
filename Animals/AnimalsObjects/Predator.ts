@@ -62,7 +62,8 @@ export class Predator extends Animal{
     }
 
 
-    public override eat(dataBase: any){
+    public override eat(){
+      let dataBase = DataBaseAnimals.getInstance()
         if (this.hungerValue < 40){
           let index = this.findFood(dataBase, 0)
           dataBase.getObject(index).use(this)
@@ -77,10 +78,9 @@ export class Predator extends Animal{
     this.type = PredatorTypes.Dead
 }
 
-  public use(animal: any): number{
+  public override use(animal: any){
     animal.setHungerValue(this.satiety)
     this.die(this, "use")
-    return this.satiety
   }
 
 

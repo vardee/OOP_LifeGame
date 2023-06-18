@@ -54,8 +54,9 @@ export class Herbivores extends Animal{
 }
  
     
-    public override eat(dataBase: PlantDataBase){
-      if (this.hungerValue < 40){
+    public override eat(){
+      let dataBase = PlantDataBase.getInstance()
+      if (this.hungerValue < 40 && dataBase.getDataBaseSize() != 0){
         let index = this.findFood(dataBase, 0)
         dataBase.getObject(index).use(this)
       }
@@ -73,10 +74,9 @@ export class Herbivores extends Animal{
     return index
   }
 
-  public use(animal: any): number{
+  public override use(animal: any){
     animal.setHungerValue(this.satiety)
     this.die(this, "use")
-    return this.satiety
   }
 
   public setDeath(){

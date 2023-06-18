@@ -21,4 +21,6 @@ export enum PredatorTypes{
 
 export enum HumanType{
     Human = "Human",
+    Dead = "Dead"
 }
+

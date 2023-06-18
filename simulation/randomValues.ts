@@ -31,7 +31,7 @@ export class RandomValues {
       let randomY = randomStartY + Math.random() * distance;
       
     
-      if (type == "jkljkhjkh"){
+      if (type !== "plant"){
         const existingCoordinates = this.getExistingCoordinates();
        while (this.coordinatesExist(existingCoordinates, randomX, randomY) || randomX >= map.getSize() || randomY >= map.getSize()) {
         randomX = randomStartX + Math.random() * distance;
@@ -62,4 +62,21 @@ export class RandomValues {
       }
       return false;
     }
-  }
+
+    public generateRandomName(length: number): string {
+      const letters = 'abcdefghijklmnopqrstuvwxyz';
+      let name = '';
+    
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * letters.length);
+        const character = letters.charAt(randomIndex);
+        name += character;
+      }
+    
+      return name;
+    }
+}
+
+  
+
+
