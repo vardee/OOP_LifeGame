@@ -28,9 +28,9 @@ import { SimulationMap } from "../../simulation/Map.js";
             if (tick === plant.getTimeToGrow())
             {const newPlant = new Trees(
                 randomizer.createRandomValue(10, 20),
-                tick + randomizer.createRandomValue(10, 20),
+                tick + randomizer.createRandomValue(10, 13),
                 randomizer.createRandomValue(plant.getNumberOfWoods() - 3, plant.getNumberOfWoods() + 2),
-                tick + randomizer.createRandomValue(1, 7),
+                tick + randomizer.createRandomValue(1, 1),
                 randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, plant, map),
                 plant.getType()
                 )

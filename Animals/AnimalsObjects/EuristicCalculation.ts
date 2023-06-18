@@ -10,7 +10,7 @@ export class EuristicCalculation {
       return EuristicCalculation.instance;
     }
   
-    public manhattanHeuristic(startObject: any, endObject: any) {
+    public manhattanHeuristic(startObject: any, endObject: any): number {
       return (
         Math.abs(startObject.getCoordinates().x - endObject.getCoordinates().x) +
         Math.abs(startObject.getCoordinates().y - endObject.getCoordinates().y)

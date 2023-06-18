@@ -29,7 +29,7 @@ import { SimulationMap } from "../../simulation/Map.js";
                 const newPlant = new Grass(
                 tick + randomizer.createRandomValue(10, 20),
                 randomizer.createRandomValue(plant.getSatiety() - 3, plant.getSatiety() + 2),
-                tick + randomizer.createRandomValue(1, 5),
+                tick + randomizer.createRandomValue(1, 1),
                 randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, "plant", map),
                 plant.getType()
                 )

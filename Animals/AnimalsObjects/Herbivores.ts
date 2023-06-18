@@ -54,8 +54,8 @@ export class Herbivores extends Animal{
 }
  
     
-    public override eat(dataBase: any){
-      if (this.hungerValue < 60){
+    public override eat(dataBase: PlantDataBase){
+      if (this.hungerValue < 40){
         let index = this.findFood(dataBase, 0)
         dataBase.getObject(index).use(this)
       }
@@ -66,13 +66,10 @@ export class Herbivores extends Animal{
   }
 
   public findFood(dataBase: PlantDataBase, index): number{
-    let minimumEuristic = 9999999
-    for (let i = 0; i < dataBase.getDataBaseSize(); i++){
-      const euristicCalculation = EuristicCalculation.getInstance();
-        if (euristicCalculation.manhattanHeuristic(this, dataBase.getObject(i)) < minimumEuristic)
-          index = i;
-    }
+    const randomizer = RandomValues.getInstance()
+    index = randomizer.createRandomValue(0, dataBase.getDataBaseSize() - 1)
     this.teleportation(dataBase.getObject(index))
+    
     return index
   }
 

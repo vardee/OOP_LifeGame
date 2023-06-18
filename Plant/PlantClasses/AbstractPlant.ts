@@ -1,4 +1,4 @@
-import { Creature } from "./creature.js"
+import { Creature } from "../../creature.js"
 import { PlantDataBase } from "../../image/BruhDataBase.js"
 import { Coordinates } from "./Coordinates.js"
 import { SimulationMap } from "../../simulation/Map.js"

@@ -35,7 +35,7 @@ export class Predator extends Animal{
             randomizer.createRandomValue(40, 60),
             100,
             randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
-            tick + randomizer.createRandomValue(30, 45),
+            tick + randomizer.createRandomValue(40, 50),
             randomizer.createRandomValue(60, 90), 
             randomizer.createRandomValue(60, 100),
             randomizer.createRandomValue(60, 100),
@@ -63,7 +63,7 @@ export class Predator extends Animal{
 
 
     public override eat(dataBase: any){
-        if (this.hungerValue < 60){
+        if (this.hungerValue < 40){
           let index = this.findFood(dataBase, 0)
           dataBase.getObject(index).use(this)
         }

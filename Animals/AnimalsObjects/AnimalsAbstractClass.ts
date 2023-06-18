@@ -1,5 +1,5 @@
 import { Coordinates } from "../../Plant/PlantClasses/Coordinates.js";
-import { Creature } from "../../Plant/PlantClasses/creature.js";
+import { Creature } from "../../creature.js";
 import { Sex } from "./sex.js";
 import { DataBaseAnimals } from "../../image/BruhDataBase.js";
 import { SimulationMap } from "../../simulation/Map.js";
@@ -92,7 +92,7 @@ export abstract class Animal extends Creature {
       const map = SimulationMap.getInstance(100);
       const currentCoordinates = this.getCoordinates();
       const randomizer = RandomValues.getInstance();
-      this.setCoordinates(randomizer.createRandomCoordinate(objectToTeleport.getCoordinates().x, objectToTeleport.getCoordinates().y, 10, '', map));
+      this.setCoordinates(randomizer.createRandomCoordinate(objectToTeleport.getCoordinates().x, objectToTeleport.getCoordinates().y, 3, '', map));
       drawable.drawObject(map, currentCoordinates.x, currentCoordinates.y, "");
     }
 
@@ -140,7 +140,6 @@ export abstract class Animal extends Creature {
     public setHungerValue(newhungerValue: number) {
         this.hungerValue += newhungerValue
     }
-    abstract getType();
 
     public setHealth(value: number){
         this.health += value

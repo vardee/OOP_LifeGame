@@ -38,7 +38,7 @@ export class startElements{
           randomizer.createRandomValue(3, 8), 
             randomizer.createRandomValue(12, 20), 
             randomizer.createRandomValue(5, 20), 
-            randomizer.createRandomValue(5, 8), 
+            randomizer.createRandomValue(1, 1), 
             randomStartPosition, TreeTypes.Oak);
 
         dataBase.addObject(oakTree)
@@ -49,7 +49,7 @@ export class startElements{
                 randomizer.createRandomValue(3, 8),
                 randomizer.createRandomValue(12, 20),
                 randomizer.createRandomValue(5, 20),
-                randomizer.createRandomValue(5, 8),
+                randomizer.createRandomValue(1, 1),
                 randomizer.createRandomCoordinate(
                   randomStartPosition.x,
                   randomStartPosition.y,
@@ -68,7 +68,7 @@ export class startElements{
               [type]: new Grass(
                 randomizer.createRandomValue(12, 20),
                 randomizer.createRandomValue(5, 20),
-                randomizer.createRandomValue(5, 8),
+                randomizer.createRandomValue(1, 1),
                 randomizer.createRandomCoordinate(
                   randomStartPosition.x,
                   randomStartPosition.y,
@@ -87,7 +87,7 @@ export class startElements{
                 randomizer.createRandomValue(12, 20),
                 randomizer.createRandomValue(12, 20),
                 randomizer.createRandomValue(5, 20),
-                randomizer.createRandomValue(5, 20),
+                randomizer.createRandomValue(1, 1),
                 randomizer.createRandomCoordinate(
                   randomStartPosition.x,
                   randomStartPosition.y,
@@ -123,7 +123,7 @@ export class startElements{
           randomizer.createRandomValue(5, 10),
           randomizer.createRandomValue(5, 10),
           randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
-          randomizer.createRandomValue(5, 10),
+          randomizer.createRandomValue(20, 30),
           randomizer.createRandomValue(5, 10),
           randomizer.createRandomValue(60, 100),
           randomizer.createRandomValue(60, 100),
@@ -139,7 +139,7 @@ export class startElements{
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
-              randomizer.createRandomValue(5, 10),
+              randomizer.createRandomValue(20, 30),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(60, 100),
@@ -164,7 +164,7 @@ export class startElements{
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
-              randomizer.createRandomValue(5, 10),
+              randomizer.createRandomValue(30, 40),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(60, 100),
@@ -189,7 +189,7 @@ export class startElements{
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
-              randomizer.createRandomValue(5, 10),
+              randomizer.createRandomValue(40, 50),
               randomizer.createRandomValue(5, 10),
               randomizer.createRandomValue(60, 100),
               randomizer.createRandomValue(60, 100),
@@ -209,3 +209,4 @@ export class startElements{
       } 
   }
 }
+    

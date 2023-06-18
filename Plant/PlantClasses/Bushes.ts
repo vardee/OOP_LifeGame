@@ -27,10 +27,10 @@ import { SimulationMap } from "../../simulation/Map.js";
             const randomizer = RandomValues.getInstance();
             if (tick === plant.getTimeToGrow())
             {const newPlant = new Bushes(
-                tick + randomizer.createRandomValue(10, 20),
-                tick + randomizer.createRandomValue(10, 20),
+                randomizer.createRandomValue(5, 13),
+                tick + randomizer.createRandomValue(10, 15),
                 randomizer.createRandomValue(plant.getDamage() - 3, plant.getDamage() + 2),
-                tick + randomizer.createRandomValue(1, 7),
+                tick + randomizer.createRandomValue(1, 1),
                 randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, plant, map),
                 plant.getType()
                 )
@@ -50,6 +50,6 @@ import { SimulationMap } from "../../simulation/Map.js";
         public override use(animal: any) {
             animal.setHungerValue(this.getSatiety())
             this.die(this, "use")
-            animal.setHealth
+            animal.setHealth(-this.getDamage())
         }
     }

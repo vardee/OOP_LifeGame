@@ -56,13 +56,17 @@ public findFood(plantDataBase: any, index): number{
     let plantIndex = 0
     let animalIndex = 0
     let last = "plant"
-    let minimumEuristic = 9999999
+    let euristic: number;
+    const maxValue = 9999999
+    let minimumEuristic = maxValue
     for (let i = 0; i < Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize()); i++){
       const euristicCalculation = EuristicCalculation.getInstance();
-        if (euristicCalculation.manhattanHeuristic(this, plantDataBase.getObject(i)) < minimumEuristic)
+        if ((euristic = euristicCalculation.manhattanHeuristic(this, plantDataBase.getObject(i))) < minimumEuristic)
+          minimumEuristic = euristic
           plantIndex = i;
           last = "plant"
-        if (euristicCalculation.manhattanHeuristic(this, animalDataBase.getObject(i)) < minimumEuristic)
+        if ((euristic = euristicCalculation.manhattanHeuristic(this, animalDataBase.getObject(i))) < minimumEuristic)
+          minimumEuristic = euristic
           animalIndex = i;
           last = "animal"
     }
@@ -78,7 +82,7 @@ public findFood(plantDataBase: any, index): number{
   }
 
     public override eat(dataBase: any){
-        if (this.hungerValue < 60){
+        if (this.hungerValue < 40){
           let index = this.findFood(dataBase, 0)
           dataBase.getObject(index).use(this)
         }
