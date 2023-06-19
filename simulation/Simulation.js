@@ -1,10 +1,11 @@
 import { SimulationMap } from "./Map.js";
-import { PlantDataBase } from "../image/BruhDataBase.js";
+import { BuildingDataBase, PlantDataBase } from "../image/BruhDataBase.js";
 import { startElements } from "./starterPackForSimulation.js";
 import { ImageProvider } from "../image/ImageProvider.js";
 import { Timer } from "./timer.js";
 import { DataBaseAnimals } from "../image/BruhDataBase.js";
 import { HumanDataBase } from "../image/BruhDataBase.js";
+import { SimulatonSupporter } from "./SimulationSupporter.js";
 class Simulation {
     simulationStarted;
     constructor(simulationStarted) {
@@ -17,7 +18,9 @@ class Simulation {
         const plantDataBase = PlantDataBase.getInstance();
         const animalDataBase = DataBaseAnimals.getInstance();
         const humanDataBase = HumanDataBase.getInstance();
+        const buildingDataBase = BuildingDataBase.getInstance();
         const drawer = ImageProvider.getInstance();
+        let simulationSupporter = new SimulatonSupporter();
         const beginOfSimulation = new startElements;
         const timer = Timer.getInstance();
         timer.timeRunning();
@@ -26,45 +29,11 @@ class Simulation {
             beginOfSimulation.createStarterPack(plantDataBase, animalDataBase, humanDataBase, map);
         }
         this.simulationStarted = true;
-        this.supportSimulation(timer, plantDataBase, animalDataBase, humanDataBase, map, drawer);
+        this.supportSimulation(timer, humanDataBase, plantDataBase, animalDataBase, buildingDataBase, map, drawer, simulationSupporter);
     }
-    supportSimulation(timer, plantDataBase, animalDataBase, humanDataBase, map, drawer) {
+    supportSimulation(timer, humanDataBase, plantDataBase, animalDataBase, buildingDataBase, map, drawer, simulationSupporter) {
         timer.addTickListener((time) => {
-            // drawer.drawMap(map)
-            for (let i = 0; i < animalDataBase.getDataBaseSize(); i++) {
-                animalDataBase.getObject(i).move();
-                if (animalDataBase.getObject(i).getHungerValue() >= 0)
-                    animalDataBase.getObject(i).setHungerValue(-5);
-                if (animalDataBase.getDataBaseSize() < 70) {
-                    animalDataBase.getObject(i).reproduction(animalDataBase, timer.getTime(), map);
-                }
-                animalDataBase.getObject(i).eat(plantDataBase);
-                drawer.getObject(animalDataBase, map, i);
-            }
-            for (let i = 0; i < plantDataBase.getDataBaseSize(); i++) {
-                if (plantDataBase.getDataBaseSize() < 250)
-                    plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time, map);
-                drawer.getObject(plantDataBase, map, i);
-                plantDataBase.removeDeads(plantDataBase.getObject(i), i);
-            }
-            for (let i = 0; i < humanDataBase.getDataBaseSize(); i++) {
-                humanDataBase.getObject(i).move();
-                if (humanDataBase.getObject(i).getWoodInHands() < 100) {
-                    humanDataBase.getObject(i).getWood(plantDataBase);
-                }
-                if (humanDataBase.getObject(i).getWoodInHands() >= 100) {
-                    humanDataBase.getObject(i).setCountOfWood(-100);
-                }
-                if (humanDataBase.getObject(i).getHungerValue() >= 0)
-                    humanDataBase.getObject(i).setHungerValue(-5);
-                if (humanDataBase.getDataBaseSize() < 70) {
-                    humanDataBase.getObject(i).reproduction(humanDataBase, timer.getTime(), map);
-                }
-                humanDataBase.getObject(i).eat(plantDataBase);
-                drawer.getObject(humanDataBase, map, i);
-                console.log(humanDataBase.getObject(i).getName());
-                console.log(humanDataBase.getObject(i).getWoodInHands());
-            }
+            simulationSupporter.simulationSupport(plantDataBase, animalDataBase, humanDataBase, map, time, drawer, buildingDataBase);
         });
     }
     endSimulation() {

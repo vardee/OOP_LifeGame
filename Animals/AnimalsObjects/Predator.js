@@ -1,6 +1,7 @@
 import { Animal } from "./AnimalsAbstractClass.js";
 import { Sex } from "./sex.js";
 import { PredatorTypes } from "../AnimalTypes.js";
+import { DataBaseAnimals } from "../../image/BruhDataBase.js";
 import { RandomValues } from "../../simulation/randomValues.js";
 import { EuristicCalculation } from "./EuristicCalculation.js";
 export class Predator extends Animal {
@@ -32,7 +33,8 @@ export class Predator extends Animal {
         this.teleportation(dataBase.getObject(index));
         return index;
     }
-    eat(dataBase) {
+    eat() {
+        let dataBase = DataBaseAnimals.getInstance();
         if (this.hungerValue < 40) {
             let index = this.findFood(dataBase, 0);
             dataBase.getObject(index).use(this);
@@ -47,6 +49,5 @@ export class Predator extends Animal {
     use(animal) {
         animal.setHungerValue(this.satiety);
         this.die(this, "use");
-        return this.satiety;
     }
 }

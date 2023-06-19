@@ -1,11 +1,11 @@
-import { HumanDataBase, PlantDataBase } from "../../image/BruhDataBase.js";
+import { PlantDataBase } from "../../image/BruhDataBase.js";
 import {Plant} from "./AbstractPlant.js";
 import { Coordinates } from "./Coordinates.js";
 import { TreeTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
 import { SimulationMap } from "../../simulation/Map.js";
-import { HumanType } from "../../Animals/AnimalTypes.js";
-import { Human } from "../../Animals/AnimalsObjects/Human.js";
+import { Human } from "../../Animals/AnimalsObjects/Humans.js";
+import { HumanDataBase } from "../../image/BruhDataBase.js";
 
     export  class Trees extends Plant{
         constructor(
@@ -27,7 +27,6 @@ import { Human } from "../../Animals/AnimalsObjects/Human.js";
 
         public override grow(dataBase: PlantDataBase, plant: any, tick: number, map: SimulationMap) {
             const randomizer = RandomValues.getInstance();
-            
             if (tick === plant.getTimeToGrow())
             {const newPlant = new Trees(
                 randomizer.createRandomValue(10, 20),
@@ -48,18 +47,15 @@ import { Human } from "../../Animals/AnimalsObjects/Human.js";
         public setDeath(){
             this.type = TreeTypes.Dead
         }
-        public getNumberOfWood(){
-            return this.numberOfWood;
-        }
 
         public override use (animal: any){
             const humanDataBase = HumanDataBase.getInstance();
             if (animal instanceof Human){
-                console.log("bruhhhh")
                 animal.setCountOfWood(this.numberOfWood)
             }
             else
                 animal.setHungerValue(this.satiety)
             this.die(this, "use")
         }
+
     }

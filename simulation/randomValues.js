@@ -16,7 +16,7 @@ export class RandomValues {
     createRandomCoordinate(randomStartX, randomStartY, distance, type, map) {
         let randomX = randomStartX + Math.random() * distance;
         let randomY = randomStartY + Math.random() * distance;
-        if (type == "jkljkhjkh") {
+        if (type !== "plant") {
             const existingCoordinates = this.getExistingCoordinates();
             while (this.coordinatesExist(existingCoordinates, randomX, randomY) || randomX >= map.getSize() || randomY >= map.getSize()) {
                 randomX = randomStartX + Math.random() * distance;

@@ -1,6 +1,8 @@
-import { DataBaseAnimals, PlantDataBase } from "./BruhDataBase.js";
+import { DataBaseAnimals, HumanDataBase, PlantDataBase } from "./BruhDataBase.js";
 import { BushTypes, GrassTypes, TreeTypes } from "../Plant/types.js";
-import { PredatorTypes, OmnivoresTypes, HerbivoresTypes, HumanType } from "../Animals/AnimalTypes.js";
+import { PredatorTypes, OmnivoresTypes, HerbivoresTypes } from "../Animals/AnimalTypes.js";
+import { HumanType } from "../Animals/AnimalTypes.js";
+import { BuildingTypes } from "../Animals/Building/building.js";
 export class Drawable {
     static instance;
     constructor() { }
@@ -18,7 +20,8 @@ export class Drawable {
         if (countElement) {
             const plantDataBase = PlantDataBase.getInstance();
             const animalDataBase = DataBaseAnimals.getInstance();
-            countElement.textContent = `Количество объектов: ${plantDataBase.getDataBaseSize() + animalDataBase.getDataBaseSize()}`;
+            const humanDataBase = HumanDataBase.getInstance();
+            countElement.textContent = `Количество объектов: ${plantDataBase.getDataBaseSize() + animalDataBase.getDataBaseSize() + humanDataBase.getDataBaseSize()}`;
         }
     }
     getColor(type) {
@@ -62,7 +65,9 @@ export class Drawable {
             case PredatorTypes.Wolf:
                 return "#636363";
             case HumanType.Human:
-                return "#636363";
+                return "red";
+            case BuildingTypes.Building:
+                return "black";
             case GrassTypes.Dead:
             case TreeTypes.Dead:
             case BushTypes.Dead:

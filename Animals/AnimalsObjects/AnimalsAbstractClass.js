@@ -87,7 +87,7 @@ export class Animal extends Creature {
         const map = SimulationMap.getInstance(100);
         const currentCoordinates = this.getCoordinates();
         const randomizer = RandomValues.getInstance();
-        this.setCoordinates(randomizer.createRandomCoordinate(objectToTeleport.getCoordinates().x, objectToTeleport.getCoordinates().y, 3, '', map));
+        this.setCoordinates(randomizer.createRandomCoordinate(objectToTeleport.getCoordinates().x, objectToTeleport.getCoordinates().y, 10, '', map));
         drawable.drawObject(map, currentCoordinates.x, currentCoordinates.y, "");
     }
     defence() {
@@ -102,7 +102,7 @@ export class Animal extends Creature {
     getHealth() {
         return this.health;
     }
-    getDamage() {
+    getDamege() {
         return this.damage;
     }
     getTimeToRest() {

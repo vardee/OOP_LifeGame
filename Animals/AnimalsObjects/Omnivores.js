@@ -4,6 +4,7 @@ import { OmnivoresTypes } from "../AnimalTypes.js";
 import { DataBaseAnimals } from "../../image/BruhDataBase.js";
 import { RandomValues } from "../../simulation/randomValues.js";
 import { EuristicCalculation } from "./EuristicCalculation.js";
+import { PlantDataBase } from "../../image/BruhDataBase.js";
 export class Omnivores extends Animal {
     type;
     constructor(speed, satiety, health, sex, excitement, damage, timeToRest, hungerValue, timetoDeath, coordinates, type) {
@@ -23,8 +24,9 @@ export class Omnivores extends Animal {
             }
         }
     }
-    findFood(plantDataBase, index) {
+    findFood(index) {
         const animalDataBase = DataBaseAnimals.getInstance();
+        const plantDataBase = PlantDataBase.getInstance();
         let plantIndex = 0;
         let animalIndex = 0;
         let last = "plant";
@@ -33,7 +35,7 @@ export class Omnivores extends Animal {
         let minimumEuristic = maxValue;
         for (let i = 0; i < Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize()); i++) {
             const euristicCalculation = EuristicCalculation.getInstance();
-            if ((euristic = euristicCalculation.manhattanHeuristic(this, plantDataBase.getObject(i))) < minimumEuristic)
+            if ((euristic = euristicCalculation.manhattanHeuristic(this, plantDataBase.getObject(i))) < minimumEuristic && plantDataBase.getDataBaseSize() != 0)
                 minimumEuristic = euristic;
             plantIndex = i;
             last = "plant";
@@ -52,9 +54,10 @@ export class Omnivores extends Animal {
         }
         return index;
     }
-    eat(dataBase) {
-        if (this.hungerValue < 40) {
-            let index = this.findFood(dataBase, 0);
+    eat() {
+        const dataBase = PlantDataBase.getInstance();
+        if (this.hungerValue < 40 && dataBase.getDataBaseSize() != 0) {
+            let index = this.findFood(0);
             dataBase.getObject(index).use(this);
         }
     }
@@ -64,9 +67,12 @@ export class Omnivores extends Animal {
     setDeath() {
         this.type = OmnivoresTypes.Dead;
     }
+    overrideuse(animal) {
+        animal.setHungerValue(this.satiety);
+        this.die(this, "use");
+    }
     use(animal) {
         animal.setHungerValue(this.satiety);
         this.die(this, "use");
-        return this.satiety;
     }
 }

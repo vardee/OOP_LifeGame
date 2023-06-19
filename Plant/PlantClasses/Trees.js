@@ -1,8 +1,8 @@
-import { HumanDataBase } from "../../image/BruhDataBase.js";
 import { Plant } from "./AbstractPlant.js";
 import { TreeTypes } from "../types.js";
 import { RandomValues } from "../../simulation/randomValues.js";
-import { Human } from "../../Animals/AnimalsObjects/Human.js";
+import { Human } from "../../Animals/AnimalsObjects/Humans.js";
+import { HumanDataBase } from "../../image/BruhDataBase.js";
 export class Trees extends Plant {
     numberOfWood;
     type;
@@ -30,13 +30,9 @@ export class Trees extends Plant {
     setDeath() {
         this.type = TreeTypes.Dead;
     }
-    getNumberOfWood() {
-        return this.numberOfWood;
-    }
     use(animal) {
         const humanDataBase = HumanDataBase.getInstance();
         if (animal instanceof Human) {
-            console.log("bruhhhh");
             animal.setCountOfWood(this.numberOfWood);
         }
         else

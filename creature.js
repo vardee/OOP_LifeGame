@@ -12,7 +12,7 @@ export class Creature {
     }
     die(creature, reason) {
         const tick = Timer.getInstance();
-        if (creature.getTimeToDeath() === tick.getTime() || reason === "use") {
+        if (creature.getTimeToDeath() === tick.getTime() || reason === "use" || reason === "die") {
             creature.setDeath();
         }
     }

@@ -2,6 +2,7 @@ import { Animal } from "./AnimalsAbstractClass.js";
 import { Sex } from "./sex.js";
 import { RandomValues } from "../../simulation/randomValues.js";
 import { HerbivoresTypes } from "../AnimalTypes.js";
+import { PlantDataBase } from "../../image/BruhDataBase.js";
 export class Herbivores extends Animal {
     type;
     constructor(speed, satiety, health, sex, excitement, damage, timeToRest, hungerValue, timetoDeath, coordinates, type) {
@@ -21,8 +22,9 @@ export class Herbivores extends Animal {
             }
         }
     }
-    eat(dataBase) {
-        if (this.hungerValue < 40) {
+    eat() {
+        let dataBase = PlantDataBase.getInstance();
+        if (this.hungerValue < 40 && dataBase.getDataBaseSize() != 0) {
             let index = this.findFood(dataBase, 0);
             dataBase.getObject(index).use(this);
         }
@@ -39,7 +41,6 @@ export class Herbivores extends Animal {
     use(animal) {
         animal.setHungerValue(this.satiety);
         this.die(this, "use");
-        return this.satiety;
     }
     setDeath() {
         this.type = HerbivoresTypes.Dead;

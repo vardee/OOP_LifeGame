@@ -1,7 +1,7 @@
 import { Plant } from "../Plant/PlantClasses/AbstractPlant"
 import { Animal } from "../Animals/AnimalsObjects/AnimalsAbstractClass"
 import { Building } from "../Animals/Building/building"
-import { Human } from "../Animals/AnimalsObjects/Human"
+import { Human } from "../Animals/AnimalsObjects/Humans"
 
 
 interface DataBase{
@@ -65,17 +65,11 @@ export class DataBaseAnimals  implements DataBase{
     this.animalArray.push(animal);
   }
 
-  public removeDeads(animal: Animal) {
-    const coordinatesToRemove = animal.getCoordinates();
-    for (let i = 0; i < this.animalArray.length; i++) {
-      const currentAnimal = this.animalArray[i];
-      if (currentAnimal.getCoordinates() === coordinatesToRemove) {
-        this.animalArray.splice(i, 1);
-        break;
-      }
+  public removeDeads(plant: any, index) {
+    if (plant.getType().toString() === "Dead") {
+      this.animalArray.splice(index, 1);
     }
-  }
-
+}
   public getObject(index: number): Animal{
       return this.animalArray[index]
   }
@@ -105,16 +99,11 @@ export class HumanDataBase implements DataBase{
     this.humanArray.push(animal);
   }
 
-  public removeDeads(human: Human) {
-    const coordinatesToRemove = human.getCoordinates();
-    for (let i = 0; i < this.humanArray.length; i++) {
-      const currentAnimal = this.humanArray[i];
-      if (currentAnimal.getCoordinates() === coordinatesToRemove) {
-        this.humanArray.splice(i, 1);
-        break;
-      }
+  public removeDeads(human: any, index) {
+    if (human.getType().toString() === "Dead") {
+      this.humanArray.splice(index, 1);
     }
-  }
+}
 
   public getObject(index: number): Human{
       return this.humanArray[index]
@@ -128,43 +117,45 @@ export class HumanDataBase implements DataBase{
   }
 }
 
-// export class BuildingDataBase  implements DataBase{
-//   private static instance: BuildingDataBase;
-//   private buildingArray: Building[] = [];
 
-//   private constructor() {}
+export class BuildingDataBase implements DataBase{
+  private static instance: BuildingDataBase;
+  private buildingArray: Building[] = [];
 
-//   public static getInstance(): BuildingDataBase {
-//     if (!BuildingDataBase.instance) {
-//       BuildingDataBase.instance = new BuildingDataBase();
-//     }
-//     return BuildingDataBase.instance;
-//   }
+  private constructor() {}
 
-//   public addObject(animal: Animal) {
-//     this.buildingArray.push(animal);
-//   }
+  public static getInstance(): BuildingDataBase {
+    if (!BuildingDataBase.instance) {
+      BuildingDataBase.instance = new BuildingDataBase();
+    }
+    return BuildingDataBase.instance;
+  }
 
-//   public removeDeads(building: Building) {
-//     const coordinatesToRemove = building.getCoordinates();
-//     for (let i = 0; i < this.buildingArray.length; i++) {
-//       const currentBuilding = this.buildingArray[i];
-//       if (currentBuilding.getCoordinates() === coordinatesToRemove) {
-//         this.buildingArray.splice(i, 1);
-//         break;
-//       }
-//     }
-//   }
+  public addObject(building: Building) {
+    this.buildingArray.push(building);
+  }
 
-//   public getObject(index: number): Building{
-//       return this.buildingArray[index]
-//   }
-//   public getDataBaseSize(): number{
-//     return this.buildingArray.length
-//   }
+  public removeDeads(human: any, index) {
+    if (human.getType().toString() === "Dead") {
+      this.buildingArray.splice(index, 1);
+    }
+  }
 
-//   public clearAll(){
-//     this.buildingArray = [];
-//   }
-// }
+  public getObject(index: number): Building{
+      return this.buildingArray[index]
+  }
+  
+
+  public getDataBaseSize(): number{
+    return this.buildingArray.length
+  }
+  
+  public getAllObjects(): Building[] {
+    return this.buildingArray;
+}
+
+  public clearAll(){
+    this.buildingArray = [];
+  }
+}
 

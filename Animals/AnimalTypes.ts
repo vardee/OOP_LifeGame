@@ -23,3 +23,4 @@ export enum HumanType{
     Human = "Human",
     Dead = "Dead"
 }
+

@@ -4,15 +4,20 @@ export class Building {
     amountOfFood;
     amountOfWood;
     coordinates;
-    constructor(ID, owner, amountOfFood, amountOfWood, coordinates) {
+    type;
+    constructor(ID, owner, amountOfFood, amountOfWood, coordinates, type) {
         this.ID = ID;
         this.owner = owner;
         this.amountOfFood = amountOfFood;
         this.amountOfWood = amountOfWood;
         this.coordinates = coordinates;
+        this.type = type;
     }
     getOwner() {
         return this.owner;
+    }
+    setOwner(Owner) {
+        this.owner = Owner;
     }
     getAmountOfWood() {
         return this.amountOfWood;
@@ -25,6 +30,15 @@ export class Building {
     }
     setAmountOfWood(amountOfWood) {
         this.amountOfWood += amountOfWood;
+    }
+    getCoordinates() {
+        return this.coordinates;
+    }
+    getID() {
+        return this.ID;
+    }
+    getType() {
+        return this.type;
     }
 }
 export var BuildingTypes;

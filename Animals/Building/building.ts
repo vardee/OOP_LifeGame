@@ -1,5 +1,7 @@
 import { Coordinates } from "../../Plant/PlantClasses/Coordinates"
-import { Human } from "../AnimalsObjects/Human"
+import { BuildingDataBase } from "../../image/BruhDataBase";
+import { Human } from "../AnimalsObjects/Humans"
+import { HumanDataBase } from "../../image/BruhDataBase";
 
 export class Building{
     constructor(
@@ -8,9 +10,13 @@ export class Building{
         private amountOfFood: number, 
         private amountOfWood: number,
         private coordinates: Coordinates,
+        private type: BuildingTypes
     ){}
     public getOwner():Human{
         return this.owner
+    }
+    public setOwner(Owner: Human){
+        this.owner = Owner;
     }
     public getAmountOfWood(): number{
         return this.amountOfWood
@@ -27,6 +33,22 @@ export class Building{
     public setAmountOfWood(amountOfWood: number){
         this.amountOfWood += amountOfWood
     }
+    public getCoordinates(){
+        return this.coordinates
+    }
+
+    public getID(): number{
+        return this.ID
+    }
+    public getType(): any{
+        return this.type
+    }
+    // public use (animal: any){
+    //     const humanDataBase = HumanDataBase.getInstance();
+    //     if (animal instanceof Human){
+    //         animal.setHungerValue(+(100 - animal.getHungerValue()))
+    //     }
+    // }
 }
 
 
