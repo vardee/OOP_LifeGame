@@ -8,20 +8,19 @@ import { DataBaseAnimals } from "../../image/BruhDataBase.js";
 import { PlantDataBase } from "../../image/BruhDataBase.js";
 import { Trees } from "../../Plant/PlantClasses/Trees.js";
 import { EuristicCalculation } from "./EuristicCalculation.js";
+import { BuildingDataBase } from "../../image/BruhDataBase.js";
+import { Building } from "../Building/building.js";
+import { BuildingTypes } from "../Building/building.js";
 
-interface bruh{
-
-}
-
-export class Human extends Animal{
+export class Human extends Animal {
     constructor(
+        private numberOfHouses: number,
         speed: number,
         private name: String,
         private surname: String,
         private age: number,
         private woodInHands: number,
         private foodInHands: number,
-        //private  house: Building,
         satiety: number,
         health: number,
         sex: Sex,
@@ -48,6 +47,7 @@ export class Human extends Animal{
                 const randomizer = RandomValues.getInstance();
 
                 const newAnimal = new Human(
+                    0,
                     randomizer.createRandomValue(5, 10),
                     randomizer.generateRandomName(randomizer.createRandomValue(2, 10)),
                     randomizer.generateRandomName(randomizer.createRandomValue(5, 10)),
@@ -61,7 +61,7 @@ export class Human extends Animal{
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(60, 100),
-                    tick + randomizer.createRandomValue(60, 100),
+                    randomizer.createRandomValue(this.getTimeToDeath() + 20, this.getTimeToDeath() + 40),
                     randomizer.createRandomCoordinate(this.getCoordinates().x, this.getCoordinates().y, 20, '', map),
                     this.getType()
                 );
@@ -83,19 +83,28 @@ export class Human extends Animal{
         return this.age;
     }
 
+    public getNumberOfBuildings(): number{
+        return this.numberOfHouses;
+    }
+
+    public setNumberOfBuildings(){
+        this.numberOfHouses++
+    }
 
 
-    public findFood(index) {
+    public findFood(index){
         const animalDataBase = DataBaseAnimals.getInstance()
         const plantDataBase = PlantDataBase.getInstance()
+        const buildingDataBase = BuildingDataBase.getInstance()
         let plantIndex = 0
         let animalIndex = 0
+        let buildIndex = 0
         let last = "plant"
         let euristic: number;
         const maxValue = 9999999
         let minimumEuristic = maxValue
         const euristicCalculation = EuristicCalculation.getInstance();
-        for (let i = 0; i < Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize()); i++) {
+        for (let i = 0; i < Math.min((Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize())),buildingDataBase.getDataBaseSize()); i++) {
             const plantObject = plantDataBase.getObject(i);
 
             if (plantObject instanceof Trees) {
@@ -113,6 +122,12 @@ export class Human extends Animal{
                 animalIndex = i;
                 last = "animal"
             }
+
+            if ((euristic = euristicCalculation.manhattanHeuristic(this, buildingDataBase.getObject(i))) < minimumEuristic) {
+                minimumEuristic = euristic
+                buildIndex = i;
+                last = "build"
+            }
         }
 
         if (last = "animal") {
@@ -121,21 +136,22 @@ export class Human extends Animal{
             animalDataBase.getObject(index).use(this)
         }
 
-        else {
+        else if(last = "plant"){
             index = plantIndex
             this.teleportation(plantDataBase.getObject(index))
             plantDataBase.getObject(index).use(this)
         }
-
+        else if(last = "build"){
+            index = buildIndex
+            this.teleportation(buildingDataBase.getObject(index))
+            buildingDataBase.getObject(index).use(this)
+        }
     }
 
     public override eat() {
-        const plantDataBase = PlantDataBase.getInstance()
-        const animalDataBase = DataBaseAnimals.getInstance()
-        if (this.hungerValue < 40 && (plantDataBase.getDataBaseSize() != 0 || animalDataBase.getDataBaseSize() != 0)) {
-            this.findFood(0)
-        }
+        this.findFood(0)
     }
+
 
 
     public override getType() {
@@ -159,9 +175,10 @@ export class Human extends Animal{
         }
     }
 
-    public use(animal: any) {
+    public use(animal: any): number {
         animal.setHungerValue(this.satiety)
         this.die(this, "use")
+        return this.satiety
     }
 
     public findWood(dataBase: PlantDataBase, index): number {
@@ -175,7 +192,19 @@ export class Human extends Animal{
     public setCountOfWood(countOfWood: number) {
         this.woodInHands += countOfWood;
     }
-
-
+    public createBuilding(dataBase: BuildingDataBase, index: number, map) {
+        const buildingCoordinates = this.getCoordinates();
+        const randomizer = RandomValues.getInstance();
+        const newBuilding = new Building(
+            dataBase.getDataBaseSize() - 1,
+            this,
+            1,
+            1,
+            randomizer.createRandomCoordinate(buildingCoordinates.x, buildingCoordinates.y, 1, '', map),
+            BuildingTypes.Building
+        );
+        dataBase.addObject(newBuilding);
+    }
 }
+
 

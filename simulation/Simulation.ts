@@ -6,6 +6,7 @@ import { Timer } from "./timer.js";
 import { DataBaseAnimals } from "../image/BruhDataBase.js";
 import { HumanDataBase } from "../image/BruhDataBase.js";
 import { SimulatonSupporter } from "./SimulationSupporter.js";
+import { BuildingDataBase } from "../image/BruhDataBase.js";
 
 class Simulation {
     constructor(private simulationStarted: boolean) {
@@ -15,6 +16,7 @@ class Simulation {
     public startSimulation() {
 
         const mapSize = 100
+        const buildingDataBase = BuildingDataBase.getInstance();
         const map = SimulationMap.getInstance(mapSize);
         const plantDataBase = PlantDataBase.getInstance();
         const animalDataBase = DataBaseAnimals.getInstance();
@@ -32,7 +34,7 @@ class Simulation {
         }
 
         this.simulationStarted = true
-        this.supportSimulation(timer, humanDataBase, plantDataBase, animalDataBase, map, drawer, simulationSupporter)
+        this.supportSimulation(timer, humanDataBase, plantDataBase, animalDataBase, map, drawer, simulationSupporter, buildingDataBase)
     }
 
     private supportSimulation(
@@ -42,10 +44,11 @@ class Simulation {
         animalDataBase: DataBaseAnimals,
         map: SimulationMap,
         drawer: ImageProvider,
-        simulationSupporter: SimulatonSupporter
+        simulationSupporter: SimulatonSupporter,
+        buildingDataBase: BuildingDataBase
     ) {
         timer.addTickListener((time) => {
-            simulationSupporter.simulationSupport(plantDataBase, animalDataBase, humanDataBase,map,time,drawer)
+            simulationSupporter.simulationSupport(plantDataBase, animalDataBase, humanDataBase,map,time,drawer, buildingDataBase)
         });
     }
 

@@ -226,6 +226,7 @@ export class startElements {
       HumanTypeArray.forEach((type) => {
         const data = {
           [type]: new Human(
+            0,
             randomizer.createRandomValue(5, 10),
             randomizer.generateRandomName(randomizer.createRandomValue(2, 10)),
             randomizer.generateRandomName(randomizer.createRandomValue(5, 10)),
@@ -239,7 +240,7 @@ export class startElements {
             randomizer.createRandomValue(5, 10),
             randomizer.createRandomValue(5, 10),
             randomizer.createRandomValue(60, 100),
-            randomizer.createRandomValue(60, 100),
+            randomizer.createRandomValue(1000, 1500),
             randomizer.createRandomCoordinate(
               randomStartPosition.x,
               randomStartPosition.y,
