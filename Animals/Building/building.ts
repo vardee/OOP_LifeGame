@@ -1,55 +1,55 @@
-import { Coordinates } from "../../Plant/PlantClasses/Coordinates"
-import { BuildingDataBase } from "../../image/BruhDataBase";
-import { Human } from "../AnimalsObjects/Humans"
-import { HumanDataBase } from "../../image/BruhDataBase";
+import { Human } from "../AnimalsObjects/Humans";
+import { Coordinates } from "../../Plant/PlantClasses/Coordinates";
 
-export class Building{
+export class Building {
     constructor(
-        private ID: number,
+        private inVillage: boolean,
         private owner: Human,
-        private amountOfFood: number, 
+        private amountOfFood: number,
         private amountOfWood: number,
         private coordinates: Coordinates,
         private type: BuildingTypes
-    ){}
-    public getOwner():Human{
+    ) { }
+    public getOwner(): Human {
         return this.owner
     }
-    public setOwner(Owner: Human){
+    public setOwner(Owner: Human) {
         this.owner = Owner;
     }
-    public getAmountOfWood(): number{
+    public getAmountOfWood(): number {
         return this.amountOfWood
     }
 
-    public getAmountOfFood(): number{
+    public getAmountOfFood(): number {
         return this.amountOfFood
     }
 
-    public setAmountOfFood(amountOfFood: number){
+    public setAmountOfFood(amountOfFood: number) {
         this.amountOfFood += amountOfFood
     }
 
-    public setAmountOfWood(amountOfWood: number){
+    public setAmountOfWood(amountOfWood: number) {
         this.amountOfWood += amountOfWood
     }
-    public getCoordinates(){
+    public getCoordinates() {
         return this.coordinates
     }
 
-    public getID(): number{
-        return this.ID
+    public getInVillage(): boolean{
+        return this.inVillage
     }
-    public getType(): any{
+
+    public getType(): any {
         return this.type
     }
-    public use (animal: Human){
-         animal.setHungerValue(+(100 - animal.getHungerValue()))
-         this.setAmountOfFood(-(100 - animal.getHungerValue()))
+    public use(human: Human) {
+        if (this.amountOfFood > 0) {
+            human.setHungerValue(+30)
+            this.setAmountOfFood(-30)
+        }
     }
 }
 
-
-export enum BuildingTypes{
+export enum BuildingTypes {
     Building = "Building"
 }

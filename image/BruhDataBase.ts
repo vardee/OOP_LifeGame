@@ -4,20 +4,21 @@ import { Building } from "../Animals/Building/building"
 import { Human } from "../Animals/AnimalsObjects/Humans"
 
 
-interface DataBase{
-  addObject (object: any)
-  removeDeads (object: any, index:number)
-  getObject (index: number)
+interface DataBase {
+  addObject(object: any)
+  removeDeads(object: any, index: number)
+  getObject(index: number)
   getDataBaseSize(): number
   clearAll()
 }
 
 
-export class PlantDataBase implements DataBase{
+
+export class PlantDataBase implements DataBase {
   private static instance: PlantDataBase;
   private plantArray: Plant[] = [];
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): PlantDataBase {
     if (!PlantDataBase.instance) {
@@ -31,28 +32,28 @@ export class PlantDataBase implements DataBase{
   }
 
   public removeDeads(plant: any, index) {
-      if (plant.getType().toString() === "Dead") {
-        this.plantArray.splice(index, 1);
-      }
+    if (plant.getType().toString() === "Dead") {
+      this.plantArray.splice(index, 1);
+    }
   }
 
-  public getObject(index: number): Plant{
-      return this.plantArray[index]
+  public getObject(index: number): Plant {
+    return this.plantArray[index]
   }
-  public getDataBaseSize(): number{
+  public getDataBaseSize(): number {
     return this.plantArray.length
   }
 
-  public clearAll(){
+  public clearAll() {
     this.plantArray = [];
   }
 }
 
-export class DataBaseAnimals  implements DataBase{
+export class DataBaseAnimals implements DataBase {
   private static instance: DataBaseAnimals;
   private animalArray: Animal[] = [];
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): DataBaseAnimals {
     if (!DataBaseAnimals.instance) {
@@ -69,24 +70,24 @@ export class DataBaseAnimals  implements DataBase{
     if (plant.getType().toString() === "Dead") {
       this.animalArray.splice(index, 1);
     }
-}
-  public getObject(index: number): Animal{
-      return this.animalArray[index]
   }
-  public getDataBaseSize(): number{
+  public getObject(index: number): Animal {
+    return this.animalArray[index]
+  }
+  public getDataBaseSize(): number {
     return this.animalArray.length
   }
 
-  public clearAll(){
+  public clearAll() {
     this.animalArray = [];
   }
 }
 
-export class HumanDataBase implements DataBase{
+export class HumanDataBase implements DataBase {
   private static instance: HumanDataBase;
   private humanArray: Human[] = [];
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): HumanDataBase {
     if (!HumanDataBase.instance) {
@@ -103,26 +104,26 @@ export class HumanDataBase implements DataBase{
     if (human.getType().toString() === "Dead") {
       this.humanArray.splice(index, 1);
     }
-}
-
-  public getObject(index: number): Human{
-      return this.humanArray[index]
   }
-  public getDataBaseSize(): number{
+
+  public getObject(index: number): Human {
+    return this.humanArray[index]
+  }
+  public getDataBaseSize(): number {
     return this.humanArray.length
   }
 
-  public clearAll(){
+  public clearAll() {
     this.humanArray = [];
   }
 }
 
 
-export class BuildingDataBase implements DataBase{
+export class BuildingDataBase implements DataBase {
   private static instance: BuildingDataBase;
   private buildingArray: Building[] = [];
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): BuildingDataBase {
     if (!BuildingDataBase.instance) {
@@ -141,20 +142,20 @@ export class BuildingDataBase implements DataBase{
     }
   }
 
-  public getObject(index: number): Building{
-      return this.buildingArray[index]
+  public getObject(index: number): Building {
+    return this.buildingArray[index]
   }
-  
 
-  public getDataBaseSize(): number{
+
+  public getDataBaseSize(): number {
     return this.buildingArray.length
   }
-  
+
   public getAllObjects(): Building[] {
     return this.buildingArray;
-}
+  }
 
-  public clearAll(){
+  public clearAll() {
     this.buildingArray = [];
   }
 }

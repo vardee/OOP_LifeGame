@@ -12,18 +12,14 @@ import { BuildingDataBase } from "../../image/BruhDataBase.js";
 import { Building } from "../Building/building.js";
 import { BuildingTypes } from "../Building/building.js";
 
-
-
 export class Human extends Animal {
     constructor(
         private numberOfHouses: number,
         speed: number,
-        private name: String,
-        private surname: String,
-        private age: number,
+        private name: string,
+        private surname: string,
         private woodInHands: number,
         private foodInHands: number,
-        //private  house: Building,
         satiety: number,
         health: number,
         sex: Sex,
@@ -35,7 +31,6 @@ export class Human extends Animal {
         coordinates: Coordinates,
         protected type: HumanType) {
         super(speed, satiety, health, sex, excitement, damage, timeToRest, hungerValue, coordinates, timetoDeath)
-        this.age = age;
         this.name = name;
         this.surname = surname;
         this.woodInHands = woodInHands;
@@ -53,18 +48,17 @@ export class Human extends Animal {
                     0,
                     randomizer.createRandomValue(5, 10),
                     randomizer.generateRandomName(randomizer.createRandomValue(2, 10)),
-                    randomizer.generateRandomName(randomizer.createRandomValue(5, 10)),
-                    randomizer.createRandomValue(5, 10),
-                    randomizer.createRandomValue(5, 10),
-                    randomizer.createRandomValue(5, 10),
+                    this.surname,
+                    0,
+                    0,
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
                     tick + randomizer.createRandomValue(10, 20),
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(5, 10),
-                    randomizer.createRandomValue(60, 100),
-                    tick + randomizer.createRandomValue(60, 100),
+                    randomizer.createRandomValue(200, 300),
+                    tick + randomizer.createRandomValue(100, 120),
                     randomizer.createRandomCoordinate(this.getCoordinates().x, this.getCoordinates().y, 20, '', map),
                     this.getType()
                 );
@@ -76,26 +70,22 @@ export class Human extends Animal {
         }
     }
 
-    public getName(): String {
+    public getName(): string {
         return this.name;
     }
-    public getSurName(): String {
+    public getSurName(): string {
         return this.surname;
     }
-    public getAge(): number {
-        return this.age;
-    }
 
-    public getNumberOfBuildings(): number{
+    public getNumberOfBuildings(): number {
         return this.numberOfHouses;
     }
 
-    public setNumberOfBuildings(){
+    public setNumberOfBuildings() {
         this.numberOfHouses++
     }
 
-
-    public findFood(index){
+    public findFood(index) {
         const animalDataBase = DataBaseAnimals.getInstance()
         const plantDataBase = PlantDataBase.getInstance()
         const buildingDataBase = BuildingDataBase.getInstance()
@@ -107,7 +97,7 @@ export class Human extends Animal {
         const maxValue = 9999999
         let minimumEuristic = maxValue
         const euristicCalculation = EuristicCalculation.getInstance();
-        for (let i = 0; i < Math.min((Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize())),buildingDataBase.getDataBaseSize()); i++) {
+        for (let i = 0; i < Math.min((Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize())), buildingDataBase.getDataBaseSize()); i++) {
             const plantObject = plantDataBase.getObject(i);
 
             if (plantObject instanceof Trees) {
@@ -136,17 +126,20 @@ export class Human extends Animal {
         if (last = "animal") {
             index = animalIndex
             this.teleportation(animalDataBase.getObject(index))
+            console.log("JIJA")
             animalDataBase.getObject(index).use(this)
         }
 
-        else if(last = "plant"){
+        else if (last = "plant") {
             index = plantIndex
             this.teleportation(plantDataBase.getObject(index))
+            console.log("JIJA")
             plantDataBase.getObject(index).use(this)
         }
-        else if(last = "build"){
+        else if (last = "build") {
             index = buildIndex
             this.teleportation(buildingDataBase.getObject(index))
+            console.log("JIJA")
             buildingDataBase.getObject(index).use(this)
         }
     }
@@ -199,7 +192,7 @@ export class Human extends Animal {
         const buildingCoordinates = this.getCoordinates();
         const randomizer = RandomValues.getInstance();
         const newBuilding = new Building(
-            dataBase.getDataBaseSize() - 1,
+            false,
             this,
             1,
             1,
@@ -207,7 +200,7 @@ export class Human extends Animal {
             BuildingTypes.Building
         );
         dataBase.addObject(newBuilding);
-        console.log("Building");
     }
 }
+
 

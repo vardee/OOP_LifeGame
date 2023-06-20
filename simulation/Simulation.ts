@@ -1,11 +1,12 @@
 import { SimulationMap } from "./Map.js";
-import { BuildingDataBase, PlantDataBase } from "../image/BruhDataBase.js";
+import { PlantDataBase } from "../image/BruhDataBase.js";
 import { startElements } from "./starterPackForSimulation.js";
 import { ImageProvider } from "../image/ImageProvider.js";
 import { Timer } from "./timer.js";
 import { DataBaseAnimals } from "../image/BruhDataBase.js";
 import { HumanDataBase } from "../image/BruhDataBase.js";
 import { SimulatonSupporter } from "./SimulationSupporter.js";
+import { BuildingDataBase } from "../image/BruhDataBase.js";
 
 class Simulation {
     constructor(private simulationStarted: boolean) {
@@ -15,11 +16,11 @@ class Simulation {
     public startSimulation() {
 
         const mapSize = 100
+        const buildingDataBase = BuildingDataBase.getInstance();
         const map = SimulationMap.getInstance(mapSize);
         const plantDataBase = PlantDataBase.getInstance();
         const animalDataBase = DataBaseAnimals.getInstance();
         const humanDataBase = HumanDataBase.getInstance();
-        const buildingDataBase = BuildingDataBase.getInstance();
         const drawer = ImageProvider.getInstance();
         let simulationSupporter = new SimulatonSupporter()
         const beginOfSimulation = new startElements
@@ -33,7 +34,7 @@ class Simulation {
         }
 
         this.simulationStarted = true
-        this.supportSimulation(timer, humanDataBase, plantDataBase, animalDataBase,buildingDataBase,map, drawer, simulationSupporter)
+        this.supportSimulation(timer, humanDataBase, plantDataBase, animalDataBase, map, drawer, simulationSupporter, buildingDataBase)
     }
 
     private supportSimulation(
@@ -41,13 +42,13 @@ class Simulation {
         humanDataBase: HumanDataBase,
         plantDataBase: PlantDataBase,
         animalDataBase: DataBaseAnimals,
-        buildingDataBase: BuildingDataBase,
         map: SimulationMap,
         drawer: ImageProvider,
-        simulationSupporter: SimulatonSupporter
+        simulationSupporter: SimulatonSupporter,
+        buildingDataBase: BuildingDataBase
     ) {
         timer.addTickListener((time) => {
-            simulationSupporter.simulationSupport(plantDataBase, animalDataBase, humanDataBase,map,time,drawer, buildingDataBase)
+            simulationSupporter.simulationSupport(plantDataBase, animalDataBase, humanDataBase, map, time, drawer, buildingDataBase)
         });
     }
 
@@ -56,10 +57,13 @@ class Simulation {
         const plantDataBase = PlantDataBase.getInstance();
         const animalDataBase = DataBaseAnimals.getInstance();
         const humanDataBase = HumanDataBase.getInstance();
+        const buildingDataBase = BuildingDataBase.getInstance();
         map.clearMap(map)
         plantDataBase.clearAll();
         animalDataBase.clearAll();
         humanDataBase.clearAll();
+        buildingDataBase.clearAll();
+        
         Timer.getInstance().zeroTime()
         this.simulationStarted = false
     }

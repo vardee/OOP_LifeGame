@@ -5,7 +5,6 @@ import { PredatorTypes, OmnivoresTypes, HerbivoresTypes } from "../Animals/Anima
 import { HumanType } from "../Animals/AnimalTypes.js";
 import { BuildingTypes } from "../Animals/Building/building.js";
 
-
 export class Drawable {
   private static instance: Drawable;
 
@@ -28,7 +27,7 @@ export class Drawable {
       const plantDataBase = PlantDataBase.getInstance()
       const animalDataBase = DataBaseAnimals.getInstance()
       const humanDataBase = HumanDataBase.getInstance()
-      countElement.textContent = `Количество объектов: ${plantDataBase.getDataBaseSize() + animalDataBase.getDataBaseSize() + humanDataBase.getDataBaseSize()}`;
+      countElement.textContent = `Количество живых объектов: ${plantDataBase.getDataBaseSize() + animalDataBase.getDataBaseSize() + humanDataBase.getDataBaseSize()}`;
     }
   }
 
@@ -74,8 +73,9 @@ export class Drawable {
         return "#636363";
       case HumanType.Human:
         return "red";
+      //Buildings
       case BuildingTypes.Building:
-          return "black";
+        return "black";
       case GrassTypes.Dead:
       case TreeTypes.Dead:
       case BushTypes.Dead:
@@ -89,3 +89,4 @@ export class Drawable {
     }
   }
 }
+

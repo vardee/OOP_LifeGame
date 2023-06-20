@@ -35,74 +35,74 @@ export class startElements {
 
     let randomStartPosition: Coordinates
     randomStartPosition = randomizer.createRandomCoordinate(randomizer.createRandomValue(5, 20), randomizer.createRandomValue(5, 70), 1, "", map)
-    for (let i = 0; i < 3; i++){
-    const oakTree = new Trees(
-      randomizer.createRandomValue(3, 8),
-      randomizer.createRandomValue(12, 20),
-      randomizer.createRandomValue(5, 20),
-      randomizer.createRandomValue(1, 1),
-      randomStartPosition, TreeTypes.Oak);
+    for (let i = 0; i < 3; i++) {
+      const oakTree = new Trees(
+        randomizer.createRandomValue(3, 8),
+        randomizer.createRandomValue(12, 20),
+        randomizer.createRandomValue(5, 20),
+        randomizer.createRandomValue(1, 1),
+        randomStartPosition, TreeTypes.Oak);
 
-    dataBase.addObject(oakTree)
+      dataBase.addObject(oakTree)
 
-    treeTypesArray.forEach((type) => {
-      const data = {
-        [type]: new Trees(
-          randomizer.createRandomValue(3, 8),
-          randomizer.createRandomValue(12, 20),
-          randomizer.createRandomValue(5, 20),
-          randomizer.createRandomValue(1, 1),
-          randomizer.createRandomCoordinate(
-            randomStartPosition.x,
-            randomStartPosition.y,
+      treeTypesArray.forEach((type) => {
+        const data = {
+          [type]: new Trees(
+            randomizer.createRandomValue(3, 8),
+            randomizer.createRandomValue(12, 20),
             randomizer.createRandomValue(5, 20),
-            "",
-            map
-          ),
-          TreeTypes[type as keyof typeof TreeTypes]
-        )
-      };
-      dataBase.addObject(data[type]);
-    });
+            randomizer.createRandomValue(1, 1),
+            randomizer.createRandomCoordinate(
+              randomStartPosition.x,
+              randomStartPosition.y,
+              randomizer.createRandomValue(5, 20),
+              "",
+              map
+            ),
+            TreeTypes[type as keyof typeof TreeTypes]
+          )
+        };
+        dataBase.addObject(data[type]);
+      });
 
-    grassTypesArray.forEach((type) => {
-      const data = {
-        [type]: new Grass(
-          randomizer.createRandomValue(12, 20),
-          randomizer.createRandomValue(5, 20),
-          randomizer.createRandomValue(1, 1),
-          randomizer.createRandomCoordinate(
-            randomStartPosition.x,
-            randomStartPosition.y,
+      grassTypesArray.forEach((type) => {
+        const data = {
+          [type]: new Grass(
+            randomizer.createRandomValue(12, 20),
             randomizer.createRandomValue(5, 20),
-            "",
-            map
-          ),
-          GrassTypes[type as keyof typeof GrassTypes]
-        )
-      };
-      dataBase.addObject(data[type]);
-    });
-    bushTypesArray.forEach((type) => {
-      const data = {
-        [type]: new Bushes(
-          randomizer.createRandomValue(12, 20),
-          randomizer.createRandomValue(12, 20),
-          randomizer.createRandomValue(5, 20),
-          randomizer.createRandomValue(1, 1),
-          randomizer.createRandomCoordinate(
-            randomStartPosition.x,
-            randomStartPosition.y,
+            randomizer.createRandomValue(1, 1),
+            randomizer.createRandomCoordinate(
+              randomStartPosition.x,
+              randomStartPosition.y,
+              randomizer.createRandomValue(5, 20),
+              "",
+              map
+            ),
+            GrassTypes[type as keyof typeof GrassTypes]
+          )
+        };
+        dataBase.addObject(data[type]);
+      });
+      bushTypesArray.forEach((type) => {
+        const data = {
+          [type]: new Bushes(
+            randomizer.createRandomValue(12, 20),
+            randomizer.createRandomValue(12, 20),
             randomizer.createRandomValue(5, 20),
-            "",
-            map
-          ),
-          BushTypes[type as keyof typeof BushTypes]
-        )
-      };
-      dataBase.addObject(data[type]);
-    });
-  }
+            randomizer.createRandomValue(1, 1),
+            randomizer.createRandomCoordinate(
+              randomStartPosition.x,
+              randomStartPosition.y,
+              randomizer.createRandomValue(5, 20),
+              "",
+              map
+            ),
+            BushTypes[type as keyof typeof BushTypes]
+          )
+        };
+        dataBase.addObject(data[type]);
+      });
+    }
   }
   private createAnimalStarterPack(dataBase: DataBaseAnimals, map: SimulationMap) {
 
@@ -230,17 +230,16 @@ export class startElements {
             randomizer.createRandomValue(5, 10),
             randomizer.generateRandomName(randomizer.createRandomValue(2, 10)),
             randomizer.generateRandomName(randomizer.createRandomValue(5, 10)),
-            randomizer.createRandomValue(5, 10),
-            randomizer.createRandomValue(5, 10),
-            randomizer.createRandomValue(5, 10),
+            0,
+            0,
             randomizer.createRandomValue(5, 10),
             randomizer.createRandomValue(5, 10),
             randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
             randomizer.createRandomValue(40, 50),
             randomizer.createRandomValue(5, 10),
             randomizer.createRandomValue(5, 10),
-            randomizer.createRandomValue(60, 100),
-            randomizer.createRandomValue(60, 100),
+            randomizer.createRandomValue(300, 400),
+            randomizer.createRandomValue(200, 300),
             randomizer.createRandomCoordinate(
               randomStartPosition.x,
               randomStartPosition.y,
