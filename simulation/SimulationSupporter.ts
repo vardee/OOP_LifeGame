@@ -61,7 +61,7 @@ export class SimulatonSupporter {
 
                 }
             }
-            if (humanDataBase.getObject(i).getHungerValue() >= 40 && humanDataBase.getObject(i).getNumberOfBuildings() === 2){
+            if (humanDataBase.getObject(i).getHungerValue() >= 40 && humanDataBase.getObject(i).getNumberOfBuildings() >= 1){
                 for (let j = 0; j < buildingDataBase.getDataBaseSize(); j++) {
                     buildingDataBase.getObject(j).setAmountOfFood(+5);
                     humanDataBase.getObject(i).setHungerValue(-5);
@@ -74,7 +74,13 @@ export class SimulatonSupporter {
             else if(humanDataBase.getObject(i).getWoodInHands() < 100 && plantDataBase.getDataBaseSize() != 0 && animalDataBase.getDataBaseSize() != 0 && humanDataBase.getObject(i).getHungerValue() < 40 && buildingDataBase.getDataBaseSize() != 0){
                 humanDataBase.getObject(i).eat();
             }
-            if(humanDataBase.getObject(i).getWoodInHands() >= 100)
+            if(humanDataBase.getObject(i).getWoodInHands() >= 100 && humanDataBase.getObject(i).getNumberOfBuildings() >= 1){
+                for (let j = 0; j < buildingDataBase.getDataBaseSize(); j++) {
+                buildingDataBase.getObject(j).setAmountOfWood(+(100-humanDataBase.getObject(i).getWoodInHands()));
+                humanDataBase.getObject(i).setCountOfWood(-humanDataBase.getObject(i).getWoodInHands());
+                console.log(humanDataBase.getObject(i).getWoodInHands())
+                }
+            }
             if (humanDataBase.getDataBaseSize() < 10) {
                 humanDataBase.getObject(i).reproduction(humanDataBase, time, map);
             }
