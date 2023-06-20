@@ -42,10 +42,10 @@ export class Building {
     public getType(): any {
         return this.type
     }
-    public use(animal: Human) {
-        if (this.amountOfFood > 100) {
-            animal.setHungerValue(+(100 - animal.getHungerValue()))
-            this.setAmountOfFood(-(100 - animal.getHungerValue()))
+    public use(human: Human) {
+        if (this.amountOfFood > 0) {
+            human.setHungerValue(+30)
+            this.setAmountOfFood(-30)
         }
     }
 }

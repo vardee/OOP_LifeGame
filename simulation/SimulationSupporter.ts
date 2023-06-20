@@ -79,7 +79,7 @@ export class SimulatonSupporter {
                     humanDataBase.getObject(i).setCountOfWood(-humanDataBase.getObject(i).getWoodInHands());
                 }
             }
-            if (humanDataBase.getDataBaseSize() < 20) {
+            if (humanDataBase.getDataBaseSize() < 15) {
                 humanDataBase.getObject(i).reproduction(humanDataBase, time, map);
             }
             if (humanDataBase.getObject(i).getHungerValue() <= 0) {
