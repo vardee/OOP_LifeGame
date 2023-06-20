@@ -48,7 +48,7 @@ class Simulation {
         buildingDataBase: BuildingDataBase
     ) {
         timer.addTickListener((time) => {
-            simulationSupporter.simulationSupport(plantDataBase, animalDataBase, humanDataBase,map,time,drawer, buildingDataBase)
+            simulationSupporter.simulationSupport(plantDataBase, animalDataBase, humanDataBase, map, time, drawer, buildingDataBase)
         });
     }
 

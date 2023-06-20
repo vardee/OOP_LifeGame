@@ -73,8 +73,9 @@ export class Drawable {
         return "#636363";
       case HumanType.Human:
         return "red";
+      //Buildings
       case BuildingTypes.Building:
-          return "black";
+        return "black";
       case GrassTypes.Dead:
       case TreeTypes.Dead:
       case BushTypes.Dead:

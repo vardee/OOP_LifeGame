@@ -83,16 +83,16 @@ export class Human extends Animal {
         return this.age;
     }
 
-    public getNumberOfBuildings(): number{
+    public getNumberOfBuildings(): number {
         return this.numberOfHouses;
     }
 
-    public setNumberOfBuildings(){
+    public setNumberOfBuildings() {
         this.numberOfHouses++
     }
 
 
-    public findFood(index){
+    public findFood(index) {
         const animalDataBase = DataBaseAnimals.getInstance()
         const plantDataBase = PlantDataBase.getInstance()
         const buildingDataBase = BuildingDataBase.getInstance()
@@ -104,7 +104,7 @@ export class Human extends Animal {
         const maxValue = 9999999
         let minimumEuristic = maxValue
         const euristicCalculation = EuristicCalculation.getInstance();
-        for (let i = 0; i < Math.min((Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize())),buildingDataBase.getDataBaseSize()); i++) {
+        for (let i = 0; i < Math.min((Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize())), buildingDataBase.getDataBaseSize()); i++) {
             const plantObject = plantDataBase.getObject(i);
 
             if (plantObject instanceof Trees) {
@@ -136,12 +136,12 @@ export class Human extends Animal {
             animalDataBase.getObject(index).use(this)
         }
 
-        else if(last = "plant"){
+        else if (last = "plant") {
             index = plantIndex
             this.teleportation(plantDataBase.getObject(index))
             plantDataBase.getObject(index).use(this)
         }
-        else if(last = "build"){
+        else if (last = "build") {
             index = buildIndex
             this.teleportation(buildingDataBase.getObject(index))
             buildingDataBase.getObject(index).use(this)
