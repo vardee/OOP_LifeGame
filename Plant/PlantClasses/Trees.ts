@@ -29,7 +29,7 @@ export class Trees extends Plant {
         const randomizer = RandomValues.getInstance();
         if (tick === plant.getTimeToGrow()) {
             const newPlant = new Trees(
-                randomizer.createRandomValue(10, 20),
+                randomizer.createRandomValue(25, 32),
                 tick + randomizer.createRandomValue(10, 13),
                 randomizer.createRandomValue(plant.getNumberOfWoods() - 3, plant.getNumberOfWoods() + 2),
                 tick + randomizer.createRandomValue(1, 1),
@@ -52,6 +52,7 @@ export class Trees extends Plant {
         const humanDataBase = HumanDataBase.getInstance();
         if (animal instanceof Human) {
             animal.setCountOfWood(this.numberOfWood)
+            animal.setHungerValue(this.satiety)
         }
         else
             animal.setHungerValue(this.satiety)

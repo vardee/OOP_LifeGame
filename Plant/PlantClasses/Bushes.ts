@@ -27,7 +27,7 @@ export class Bushes extends Plant {
         const randomizer = RandomValues.getInstance();
         if (tick === plant.getTimeToGrow()) {
             const newPlant = new Bushes(
-                randomizer.createRandomValue(5, 13),
+                randomizer.createRandomValue(22, 30),
                 tick + randomizer.createRandomValue(10, 15),
                 randomizer.createRandomValue(plant.getDamage() - 3, plant.getDamage() + 2),
                 tick + randomizer.createRandomValue(1, 1),
@@ -50,6 +50,5 @@ export class Bushes extends Plant {
     public override use(animal: any) {
         animal.setHungerValue(this.getSatiety())
         this.die(this, "use")
-        animal.setHealth(-this.getDamage())
     }
 }

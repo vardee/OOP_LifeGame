@@ -57,8 +57,8 @@ export class Human extends Animal {
                     tick + randomizer.createRandomValue(10, 20),
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(5, 10),
-                    randomizer.createRandomValue(30, 39),
-                    tick + randomizer.createRandomValue(300, 400),
+                    randomizer.createRandomValue(200, 300),
+                    tick + randomizer.createRandomValue(100, 120),
                     randomizer.createRandomCoordinate(this.getCoordinates().x, this.getCoordinates().y, 20, '', map),
                     this.getType()
                 );
@@ -84,7 +84,6 @@ export class Human extends Animal {
     public setNumberOfBuildings() {
         this.numberOfHouses++
     }
-
 
     public findFood(index) {
         const animalDataBase = DataBaseAnimals.getInstance()
@@ -127,17 +126,20 @@ export class Human extends Animal {
         if (last = "animal") {
             index = animalIndex
             this.teleportation(animalDataBase.getObject(index))
+            console.log("JIJA")
             animalDataBase.getObject(index).use(this)
         }
 
         else if (last = "plant") {
             index = plantIndex
             this.teleportation(plantDataBase.getObject(index))
+            console.log("JIJA")
             plantDataBase.getObject(index).use(this)
         }
         else if (last = "build") {
             index = buildIndex
             this.teleportation(buildingDataBase.getObject(index))
+            console.log("JIJA")
             buildingDataBase.getObject(index).use(this)
         }
     }

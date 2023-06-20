@@ -57,10 +57,13 @@ class Simulation {
         const plantDataBase = PlantDataBase.getInstance();
         const animalDataBase = DataBaseAnimals.getInstance();
         const humanDataBase = HumanDataBase.getInstance();
+        const buildingDataBase = BuildingDataBase.getInstance();
         map.clearMap(map)
         plantDataBase.clearAll();
         animalDataBase.clearAll();
         humanDataBase.clearAll();
+        buildingDataBase.clearAll();
+        
         Timer.getInstance().zeroTime()
         this.simulationStarted = false
     }

@@ -238,8 +238,8 @@ export class startElements {
             randomizer.createRandomValue(40, 50),
             randomizer.createRandomValue(5, 10),
             randomizer.createRandomValue(5, 10),
-            randomizer.createRandomValue(80, 100),
-            randomizer.createRandomValue(2000, 2500),
+            randomizer.createRandomValue(300, 400),
+            randomizer.createRandomValue(200, 300),
             randomizer.createRandomCoordinate(
               randomStartPosition.x,
               randomStartPosition.y,

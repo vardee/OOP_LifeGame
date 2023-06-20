@@ -28,7 +28,7 @@ export class Grass extends Plant {
         if (tick === plant.getTimeToGrow()) {
             const newPlant = new Grass(
                 tick + randomizer.createRandomValue(10, 20),
-                randomizer.createRandomValue(plant.getSatiety() - 3, plant.getSatiety() + 2),
+                randomizer.createRandomValue(20, 25),
                 tick + randomizer.createRandomValue(1, 1),
                 randomizer.createRandomCoordinate(plant.getCoordinates().x, plant.getCoordinates().y, 3, "plant", map),
                 plant.getType()
