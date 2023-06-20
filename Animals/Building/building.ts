@@ -3,7 +3,7 @@ import { Coordinates } from "../../Plant/PlantClasses/Coordinates";
 
 export class Building {
     constructor(
-        private ID: number,
+        private inVillage: boolean,
         private owner: Human,
         private amountOfFood: number,
         private amountOfWood: number,
@@ -35,9 +35,10 @@ export class Building {
         return this.coordinates
     }
 
-    public getID(): number {
-        return this.ID
+    public getInVillage(): boolean{
+        return this.inVillage
     }
+
     public getType(): any {
         return this.type
     }

@@ -16,9 +16,8 @@ export class Human extends Animal {
     constructor(
         private numberOfHouses: number,
         speed: number,
-        private name: String,
-        private surname: String,
-        private age: number,
+        private name: string,
+        private surname: string,
         private woodInHands: number,
         private foodInHands: number,
         satiety: number,
@@ -32,7 +31,6 @@ export class Human extends Animal {
         coordinates: Coordinates,
         protected type: HumanType) {
         super(speed, satiety, health, sex, excitement, damage, timeToRest, hungerValue, coordinates, timetoDeath)
-        this.age = age;
         this.name = name;
         this.surname = surname;
         this.woodInHands = woodInHands;
@@ -50,18 +48,17 @@ export class Human extends Animal {
                     0,
                     randomizer.createRandomValue(5, 10),
                     randomizer.generateRandomName(randomizer.createRandomValue(2, 10)),
-                    randomizer.generateRandomName(randomizer.createRandomValue(5, 10)),
-                    randomizer.createRandomValue(5, 10),
-                    randomizer.createRandomValue(5, 10),
-                    randomizer.createRandomValue(5, 10),
+                    this.surname,
+                    0,
+                    0,
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(0, 1) === 0 ? Sex.female : Sex.male,
                     tick + randomizer.createRandomValue(10, 20),
                     randomizer.createRandomValue(5, 10),
                     randomizer.createRandomValue(5, 10),
-                    randomizer.createRandomValue(60, 100),
-                    randomizer.createRandomValue(this.getTimeToDeath() + 20, this.getTimeToDeath() + 40),
+                    randomizer.createRandomValue(30, 39),
+                    tick + randomizer.createRandomValue(300, 400),
                     randomizer.createRandomCoordinate(this.getCoordinates().x, this.getCoordinates().y, 20, '', map),
                     this.getType()
                 );
@@ -73,14 +70,11 @@ export class Human extends Animal {
         }
     }
 
-    public getName(): String {
+    public getName(): string {
         return this.name;
     }
-    public getSurName(): String {
+    public getSurName(): string {
         return this.surname;
-    }
-    public getAge(): number {
-        return this.age;
     }
 
     public getNumberOfBuildings(): number {
@@ -196,7 +190,7 @@ export class Human extends Animal {
         const buildingCoordinates = this.getCoordinates();
         const randomizer = RandomValues.getInstance();
         const newBuilding = new Building(
-            dataBase.getDataBaseSize() - 1,
+            false,
             this,
             1,
             1,

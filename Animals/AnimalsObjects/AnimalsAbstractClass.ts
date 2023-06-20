@@ -96,10 +96,6 @@ export abstract class Animal extends Creature {
     drawable.drawObject(map, currentCoordinates.x, currentCoordinates.y, "");
   }
 
-  public defence() {
-    // добавьте логику защиты
-  }
-
   public getSpeed(): number {
     return this.speed;
   }
@@ -118,7 +114,7 @@ export abstract class Animal extends Creature {
 
   public getTimeToRest(): number {
     return this.timeToRest;
-  }
+  } //DELETE
 
   public getHungerValue(): number {
     return this.hungerValue;
