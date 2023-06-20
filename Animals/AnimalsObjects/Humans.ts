@@ -95,7 +95,7 @@ export class Human extends Animal {
     }
 
 
-    public findFood(index): number {
+    public findFood(index){
         const animalDataBase = DataBaseAnimals.getInstance()
         const plantDataBase = PlantDataBase.getInstance()
         const buildingDataBase = BuildingDataBase.getInstance()
@@ -136,27 +136,25 @@ export class Human extends Animal {
         if (last = "animal") {
             index = animalIndex
             this.teleportation(animalDataBase.getObject(index))
+            animalDataBase.getObject(index).use(this)
         }
 
         else if(last = "plant"){
             index = plantIndex
             this.teleportation(plantDataBase.getObject(index))
+            plantDataBase.getObject(index).use(this)
         }
         else if(last = "build"){
             index = buildIndex
             this.teleportation(buildingDataBase.getObject(index))
+            buildingDataBase.getObject(index).use(this)
         }
-
-        return index
     }
 
     public override eat() {
-        const dataBase = PlantDataBase.getInstance()
-        if (this.hungerValue < 40 && dataBase.getDataBaseSize() != 0) {
-            let index = this.findFood(0)
-            dataBase.getObject(index).use(this)
-        }
+        this.findFood(0)
     }
+
 
 
     public override getType() {
@@ -199,13 +197,6 @@ export class Human extends Animal {
     }
     public createBuilding(dataBase: BuildingDataBase, index: number, map) {
         const buildingCoordinates = this.getCoordinates();
-
-  //      let objectsAround = this.getObjectsAround(dataBase, buildingCoordinates);
-
- //       while (objectsAround.length > 0) {
-   //         const newBuildingCoordinates = this.getCoordinates();
-    //        objectsAround = this.getObjectsAround(dataBase, newBuildingCoordinates);
-  //      }
         const randomizer = RandomValues.getInstance();
         const newBuilding = new Building(
             dataBase.getDataBaseSize() - 1,
@@ -218,19 +209,5 @@ export class Human extends Animal {
         dataBase.addObject(newBuilding);
         console.log("Building");
     }
-
-    // private getObjectsAround(dataBase: BuildingDataBase, coordinates: Coordinates): Building[] {
-    //     const objectsAround: Building[] = [];
-    //     const allBuildings = dataBase.getAllObjects();
-
-    //     for (const building of allBuildings) {
-    //         const buildingCoordinates = building.getCoordinates();
-
-    //         if (Math.abs(coordinates.x - buildingCoordinates.x) <= 1 && Math.abs(coordinates.y - buildingCoordinates.y) <= 1) {
-    //             objectsAround.push(building);
-    //         }
-    //     }
-    //     return objectsAround;
-    // }
 }
 

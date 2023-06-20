@@ -40,6 +40,10 @@ export class Building {
     getType() {
         return this.type;
     }
+    use(animal) {
+        animal.setHungerValue(+(100 - animal.getHungerValue()));
+        this.setAmountOfFood(-(100 - animal.getHungerValue()));
+    }
 }
 export var BuildingTypes;
 (function (BuildingTypes) {

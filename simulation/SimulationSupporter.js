@@ -45,21 +45,27 @@ export class SimulatonSupporter {
                 for (let j = 0; j < buildingDataBase.getDataBaseSize(); j++) {
                 }
             }
-            if (humanDataBase.getObject(i).getHungerValue() >= 40 && humanDataBase.getObject(i).getNumberOfBuildings() >= 2)
+            if (humanDataBase.getObject(i).getHungerValue() >= 40 && humanDataBase.getObject(i).getNumberOfBuildings() === 2) {
                 for (let j = 0; j < buildingDataBase.getDataBaseSize(); j++) {
                     buildingDataBase.getObject(j).setAmountOfFood(+5);
                     humanDataBase.getObject(i).setHungerValue(-5);
+                    console.log("AmountOfFoodInHouse");
                     console.log(buildingDataBase.getObject(j).getAmountOfFood());
+                    console.log("HumanHungerValue");
+                    console.log(humanDataBase.getObject(i).getHungerValue());
                 }
+            }
+            else if (humanDataBase.getObject(i).getWoodInHands() < 100 && plantDataBase.getDataBaseSize() != 0 && animalDataBase.getDataBaseSize() != 0 && humanDataBase.getObject(i).getHungerValue() < 40 && buildingDataBase.getDataBaseSize() != 0) {
+                humanDataBase.getObject(i).eat();
+            }
             if (humanDataBase.getDataBaseSize() < 10) {
                 humanDataBase.getObject(i).reproduction(humanDataBase, time, map);
             }
-            if (humanDataBase.getObject(i).getWoodInHands() < 100 && plantDataBase.getDataBaseSize() != 0 && animalDataBase.getDataBaseSize() != 0 && humanDataBase.getObject(i).getHungerValue() < 40) {
-                humanDataBase.getObject(i).eat();
+            if (humanDataBase.getObject(i).getHungerValue() <= 0) {
+                humanDataBase.getObject(i).die(humanDataBase.getObject(i), "");
             }
             drawer.getObject(humanDataBase, map, i);
             animalDataBase.removeDeads(humanDataBase.getObject(i), i);
-            console.log(humanDataBase.getDataBaseSize());
         }
     }
     buildingSupport(drawer, buildingDataBase, map) {

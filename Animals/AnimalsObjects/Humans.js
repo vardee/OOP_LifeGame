@@ -98,23 +98,21 @@ export class Human extends Animal {
         if (last = "animal") {
             index = animalIndex;
             this.teleportation(animalDataBase.getObject(index));
+            animalDataBase.getObject(index).use(this);
         }
         else if (last = "plant") {
             index = plantIndex;
             this.teleportation(plantDataBase.getObject(index));
+            plantDataBase.getObject(index).use(this);
         }
         else if (last = "build") {
             index = buildIndex;
             this.teleportation(buildingDataBase.getObject(index));
+            buildingDataBase.getObject(index).use(this);
         }
-        return index;
     }
     eat() {
-        const dataBase = PlantDataBase.getInstance();
-        if (this.hungerValue < 40 && dataBase.getDataBaseSize() != 0) {
-            let index = this.findFood(0);
-            dataBase.getObject(index).use(this);
-        }
+        this.findFood(0);
     }
     getType() {
         return this.type;
@@ -149,11 +147,6 @@ export class Human extends Animal {
     }
     createBuilding(dataBase, index, map) {
         const buildingCoordinates = this.getCoordinates();
-        //      let objectsAround = this.getObjectsAround(dataBase, buildingCoordinates);
-        //       while (objectsAround.length > 0) {
-        //         const newBuildingCoordinates = this.getCoordinates();
-        //        objectsAround = this.getObjectsAround(dataBase, newBuildingCoordinates);
-        //      }
         const randomizer = RandomValues.getInstance();
         const newBuilding = new Building(dataBase.getDataBaseSize() - 1, this, 1, 1, randomizer.createRandomCoordinate(buildingCoordinates.x, buildingCoordinates.y, 1, '', map), BuildingTypes.Building);
         dataBase.addObject(newBuilding);

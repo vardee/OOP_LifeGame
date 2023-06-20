@@ -52,7 +52,7 @@ export class Omnivores extends Animal {
       }     
 }
 
-public findFood(index): number{
+public findFood(index){
     const animalDataBase = DataBaseAnimals.getInstance()
     const plantDataBase = PlantDataBase.getInstance()
     let plantIndex = 0
@@ -75,21 +75,23 @@ public findFood(index): number{
     if (last = "animal"){
         index = animalIndex
         this.teleportation(animalDataBase.getObject(index))
+        animalDataBase.getObject(index).use(this)
     }
     else{
-        index = animalIndex
+        index = plantIndex
         this.teleportation(plantDataBase.getObject(index))
+        plantDataBase.getObject(index).use(this)
         }
-    return index
   }
 
-    public override eat(){
-        const dataBase = PlantDataBase.getInstance()
-        if (this.hungerValue < 40 && dataBase.getDataBaseSize() != 0){
-          let index = this.findFood(0)
-          dataBase.getObject(index).use(this)
-        }
+  public override eat(){
+    const plantDataBase = PlantDataBase.getInstance()
+    const animalDataBase = DataBaseAnimals.getInstance()
+    if (this.hungerValue < 40 && (plantDataBase.getDataBaseSize() != 0 || animalDataBase.getDataBaseSize() != 0)){
+      this.findFood(0)
     }
+}
+
 
     public override getType(){
         return this.type

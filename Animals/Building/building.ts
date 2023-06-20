@@ -43,12 +43,10 @@ export class Building{
     public getType(): any{
         return this.type
     }
-    // public use (animal: any){
-    //     const humanDataBase = HumanDataBase.getInstance();
-    //     if (animal instanceof Human){
-    //         animal.setHungerValue(+(100 - animal.getHungerValue()))
-    //     }
-    // }
+    public use (animal: Human){
+         animal.setHungerValue(+(100 - animal.getHungerValue()))
+         this.setAmountOfFood(-(100 - animal.getHungerValue()))
+    }
 }
 
 
