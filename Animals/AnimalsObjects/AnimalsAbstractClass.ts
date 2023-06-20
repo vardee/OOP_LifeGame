@@ -145,8 +145,6 @@ export abstract class Animal extends Creature {
         this.health += value
     }
 
-    abstract use(anumal: any)
-
     abstract findFood(dataBase: any, index: number);
 
 }

@@ -33,6 +33,4 @@ export abstract class Plant extends Creature{
 
         abstract setDeath();
 
-        abstract use(animal: any)
-
     } 

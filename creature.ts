@@ -27,5 +27,7 @@ export abstract class Creature{
         return this.timeToDeath
     }
 
+    abstract use(object: any)
+
     abstract getType()
 }
