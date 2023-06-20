@@ -92,51 +92,52 @@ export class Human extends Animal {
         let plantIndex = 0
         let animalIndex = 0
         let buildIndex = 0
-        let last = "plant"
+        let last = "animal"
         let euristic: number;
         const maxValue = 9999999
         let minimumEuristic = maxValue
         const euristicCalculation = EuristicCalculation.getInstance();
+        
         for (let i = 0; i < Math.min((Math.min(plantDataBase.getDataBaseSize(), animalDataBase.getDataBaseSize())), buildingDataBase.getDataBaseSize()); i++) {
             const plantObject = plantDataBase.getObject(i);
 
             if (plantObject instanceof Trees) {
                 continue;
             }
-
-            if ((euristic = euristicCalculation.manhattanHeuristic(this, plantDataBase.getObject(i))) < minimumEuristic && plantDataBase.getDataBaseSize() != 0) {
+            if (plantDataBase.getDataBaseSize() != 0)
+            {if ((euristic = euristicCalculation.manhattanHeuristic(this, plantDataBase.getObject(i))) < minimumEuristic && plantDataBase.getDataBaseSize() != 0) {
                 minimumEuristic = euristic
                 plantIndex = i;
                 last = "plant"
-            }
-
-            if ((euristic = euristicCalculation.manhattanHeuristic(this, animalDataBase.getObject(i))) < minimumEuristic) {
+            }}
+            if (animalDataBase.getDataBaseSize() != 0)
+            {if ((euristic = euristicCalculation.manhattanHeuristic(this, animalDataBase.getObject(i))) < minimumEuristic) {
                 minimumEuristic = euristic
                 animalIndex = i;
                 last = "animal"
-            }
-
+            }}
+            if (buildingDataBase.getDataBaseSize() != 0)
             if ((euristic = euristicCalculation.manhattanHeuristic(this, buildingDataBase.getObject(i))) < minimumEuristic) {
                 minimumEuristic = euristic
                 buildIndex = i;
                 last = "build"
             }
         }
-
-        if (last = "animal") {
+        
+        if (last == "animal" && (animalDataBase.getDataBaseSize() != 0)) {
             index = animalIndex
             this.teleportation(animalDataBase.getObject(index))
             console.log("JIJA")
             animalDataBase.getObject(index).use(this)
         }
 
-        else if (last = "plant") {
+        else if (last == "plant" && (plantDataBase.getDataBaseSize() != 0)) {
             index = plantIndex
             this.teleportation(plantDataBase.getObject(index))
             console.log("JIJA")
             plantDataBase.getObject(index).use(this)
         }
-        else if (last = "build") {
+        else if (last == "build" && (buildingDataBase.getDataBaseSize() != 0)) {
             index = buildIndex
             this.teleportation(buildingDataBase.getObject(index))
             console.log("JIJA")

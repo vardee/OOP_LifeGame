@@ -24,7 +24,7 @@ export class SimulatonSupporter {
         for (let i = 0; i < plantDataBase.getDataBaseSize(); i++) {
             if (plantDataBase.getDataBaseSize() < 300)
                 plantDataBase.getObject(i).grow(plantDataBase, plantDataBase.getObject(i), time, map);
-            plantDataBase.getObject(i).die(plantDataBase.getObject(i), "")
+            plantDataBase.getObject(i).die(plantDataBase.getObject(i), "") //Если есть, то победа людей, если нет, то победа растений
             drawer.getObject(plantDataBase, map, i)
             plantDataBase.removeDeads(plantDataBase.getObject(i), i)
         }
@@ -49,7 +49,6 @@ export class SimulatonSupporter {
     private humanSupport(humanDataBase: HumanDataBase, map: SimulationMap, time: number, drawer: ImageProvider, plantDataBase: PlantDataBase, animalDataBase: DataBaseAnimals, buildingDataBase: BuildingDataBase) {
         for (let i = 0; i < humanDataBase.getDataBaseSize(); i++) {
             humanDataBase.getObject(i).move();
-            console.log( humanDataBase.getObject(i).getHungerValue())
             humanDataBase.getObject(i).setHungerValue(-1);
             if (humanDataBase.getObject(i).getWoodInHands() < 100 && plantDataBase.getDataBaseSize() != 0) {
                 humanDataBase.getObject(i).getWood(plantDataBase);
@@ -70,7 +69,7 @@ export class SimulatonSupporter {
                     humanDataBase.getObject(i).setHungerValue(-5);
                 }
             }
-            else if (plantDataBase.getDataBaseSize() != 0 && animalDataBase.getDataBaseSize() != 0 && buildingDataBase.getDataBaseSize() != 0 && humanDataBase.getObject(i).getHungerValue() < 40) {
+            else if (humanDataBase.getObject(i).getHungerValue() < 40) {
                 humanDataBase.getObject(i).eat();
             }
             if (humanDataBase.getObject(i).getWoodInHands() >= 100 && humanDataBase.getObject(i).getNumberOfBuildings() >= 1) {
